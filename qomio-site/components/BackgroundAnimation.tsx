@@ -36,11 +36,17 @@ export default function BackgroundAnimation() {
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black 0%, black 62%, transparent)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 0%, black 62%, transparent)',
+          transform: 'translateZ(0)',
+          willChange: 'transform',
         }}
       >
         <div
           data-us-project="MSvSkmJb9Ax55PeV6eku"
           className="absolute w-full h-full left-0 top-0"
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+          }}
         ></div>
       </div>
 
