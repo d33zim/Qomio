@@ -59,14 +59,18 @@ export default function Stats() {
           variants={itemVariants}
           className="relative group"
         >
-          <div className="bg-gradient-to-b from-cyan-500/10 to-transparent border border-cyan-500/20 rounded-lg p-6 text-center hover:border-cyan-500/50 transition-smooth">
-            <div className="text-4xl mb-3">{stat.icon}</div>
-            <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">
-              {stat.number}
+          <div className="relative bg-zinc-900/95 border border-cyan-500/20 rounded-lg p-6 text-center hover:border-cyan-500/50 transition-smooth backdrop-blur-sm">
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-transparent rounded-lg pointer-events-none" />
+            <div className="relative z-10">
+              <div className="text-4xl mb-3">{stat.icon}</div>
+              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">
+                {stat.number}
+              </div>
+              <p className="text-sm md:text-base text-zinc-400">
+                {stat.label}
+              </p>
             </div>
-            <p className="text-sm md:text-base text-zinc-400">
-              {stat.label}
-            </p>
           </div>
 
           {/* Glow effect */}
