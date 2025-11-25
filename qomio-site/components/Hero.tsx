@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, useEffect } from 'framer-motion'
+import { motion } from 'framer-motion'
 import BackgroundAnimation from './BackgroundAnimation'
 import Stats from './Stats'
 
