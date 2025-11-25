@@ -45,20 +45,6 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Badge */}
-        <motion.div
-          variants={itemVariants}
-          className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/30 bg-cyan-950/20 mb-10 rounded-full"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full bg-cyan-400 opacity-50" />
-            <span className="relative inline-flex h-2 w-2 bg-cyan-500" />
-          </span>
-          <span className="text-xs font-medium text-cyan-300 uppercase tracking-widest">
-            Digitale Lösungen aus Riedlingen
-          </span>
-        </motion.div>
-
         {/* Heading */}
         <motion.h1
           variants={itemVariants}
