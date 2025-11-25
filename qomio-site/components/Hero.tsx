@@ -65,46 +65,46 @@ export default function Hero() {
         </motion.p>
 
         {/* Mobile buttons without beams */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:hidden gap-4 justify-center">
+        <motion.div variants={itemVariants} className="flex flex-col sm:hidden gap-4 items-center">
           <Link
             href="#kontakt"
-            className="border-dissolve"
+            className="border-dissolve inline-block max-w-xs w-auto"
           >
             Jetzt Termin sichern
           </Link>
           <Link
             href="#leistungen"
-            className="border-dissolve"
+            className="border-dissolve inline-block max-w-xs w-auto"
           >
             Unsere Leistungen
           </Link>
         </motion.div>
       </motion.div>
 
-      {/* CTA Buttons with beams - outside max-width container */}
-      <div className="w-screen -mx-4 flex flex-col sm:flex-row gap-4 justify-center items-center hidden sm:flex relative z-10">
+      {/* CTA Buttons with beams - with proper spacing from edges */}
+      <div className="w-full px-4 sm:px-8 lg:px-16 flex flex-col sm:flex-row gap-4 justify-center items-center hidden sm:flex relative z-10">
         {/* Left beam */}
-        <div className="h-px pointer-events-none bg-gradient-to-r from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative">
+        <div className="h-px pointer-events-none bg-gradient-to-r from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative min-w-[80px]">
           <div className="absolute h-full w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-beam-h"></div>
         </div>
 
-        <motion.div variants={itemVariants} className="flex gap-4">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 shrink-0">
           <Link
             href="#kontakt"
-            className="border-dissolve"
+            className="border-dissolve inline-block whitespace-nowrap"
           >
             Jetzt Termin sichern
           </Link>
           <Link
             href="#leistungen"
-            className="border-dissolve"
+            className="border-dissolve inline-block whitespace-nowrap"
           >
             Unsere Leistungen
           </Link>
         </motion.div>
 
         {/* Right beam */}
-        <div className="h-px pointer-events-none bg-gradient-to-l from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative">
+        <div className="h-px pointer-events-none bg-gradient-to-l from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative min-w-[80px]">
           <div className="absolute h-full w-32 bg-gradient-to-l from-transparent via-cyan-500 to-transparent animate-beam-h-rev"></div>
         </div>
       </div>
