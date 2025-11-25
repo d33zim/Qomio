@@ -30,9 +30,9 @@ export default function BackgroundAnimation() {
 
   return (
     <>
-      {/* Unicorn Studio Background - matches example HTML exactly */}
+      {/* Unicorn Studio Background - adapted for React component structure */}
       <div
-        className="top-0 w-full -z-10 absolute brightness-50 saturate-50 h-[900px] pointer-events-none"
+        className="top-0 w-full z-0 absolute brightness-50 saturate-50 h-[900px] pointer-events-none"
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black 0%, black 62%, transparent)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 0%, black 62%, transparent)',
@@ -40,7 +40,7 @@ export default function BackgroundAnimation() {
       >
         <div
           data-us-project="MSvSkmJb9Ax55PeV6eku"
-          className="absolute w-full h-full left-0 top-0 -z-10"
+          className="absolute w-full h-full left-0 top-0"
         ></div>
       </div>
 
