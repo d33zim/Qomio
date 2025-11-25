@@ -30,9 +30,9 @@ export default function BackgroundAnimation() {
 
   return (
     <>
-      {/* Unicorn Studio Background - absolute within Hero section */}
+      {/* Unicorn Studio Background - matches example HTML exactly */}
       <div
-        className="absolute inset-x-0 top-0 h-[900px] pointer-events-none overflow-hidden brightness-50 saturate-50"
+        className="absolute top-0 w-full h-[900px] pointer-events-none overflow-hidden brightness-50 saturate-50"
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black 0%, black 62%, transparent)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 0%, black 62%, transparent)',
@@ -41,7 +41,7 @@ export default function BackgroundAnimation() {
       >
         <div
           data-us-project="MSvSkmJb9Ax55PeV6eku"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] min-w-full min-h-full"
+          className="absolute w-full h-full left-0 top-0"
         ></div>
       </div>
 
