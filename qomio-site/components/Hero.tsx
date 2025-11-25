@@ -29,7 +29,7 @@ export default function Hero() {
     <section className="relative overflow-hidden pt-32 pb-96 px-4 min-h-screen">
       <BackgroundAnimation />
       <motion.div
-        className="max-w-5xl mx-auto relative z-10 text-center"
+        className="max-w-5xl mx-auto relative z-20 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -82,7 +82,7 @@ export default function Hero() {
       </motion.div>
 
       {/* CTA Buttons with beams - with proper spacing from edges */}
-      <div className="w-full px-4 sm:px-8 lg:px-16 flex flex-col sm:flex-row gap-4 justify-center items-center hidden sm:flex relative z-10">
+      <div className="w-full px-4 sm:px-8 lg:px-16 flex flex-col sm:flex-row gap-4 justify-center items-center hidden sm:flex relative z-20">
         {/* Left beam */}
         <div className="h-px pointer-events-none bg-gradient-to-r from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative min-w-[80px]">
           <div className="absolute h-full w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-beam-h"></div>
