@@ -37,7 +37,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-96 px-4 min-h-screen">
+    <section className="relative overflow-x-hidden overflow-y-visible pt-32 pb-96 px-4 min-h-screen">
       <BackgroundAnimation />
       <motion.div
         className="max-w-5xl mx-auto relative z-20 text-center"
