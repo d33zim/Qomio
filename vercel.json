@@ -1,7 +1,3 @@
 {
-  "buildCommand": "cd qomio-site && npm run build",
-  "devCommand": "cd qomio-site && npm run dev",
-  "installCommand": "cd qomio-site && npm install",
-  "framework": "nextjs",
-  "outputDirectory": "qomio-site/.next"
+  "rootDirectory": "qomio-site"
 }
