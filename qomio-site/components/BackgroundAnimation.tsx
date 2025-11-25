@@ -47,13 +47,13 @@ export default function BackgroundAnimation() {
 
       {/* All beams container - absolute overlay within Hero section */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 50 }}>
-        {/* Left vertical beam */}
-        <div className="absolute top-0 left-[200px] w-px h-full bg-gradient-to-b from-transparent via-zinc-800 to-transparent">
+        {/* Left vertical beam - responsive positioning */}
+        <div className="absolute top-0 left-[15%] w-px h-full bg-gradient-to-b from-transparent via-zinc-800 to-transparent">
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent via-cyan-500 to-transparent animate-beam-v"></div>
         </div>
 
-        {/* Right vertical beam */}
-        <div className="absolute top-0 right-[200px] w-px h-full bg-gradient-to-b from-transparent via-zinc-800 to-transparent">
+        {/* Right vertical beam - responsive positioning */}
+        <div className="absolute top-0 right-[15%] w-px h-full bg-gradient-to-b from-transparent via-zinc-800 to-transparent">
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent via-cyan-500 to-transparent animate-beam-v"></div>
         </div>
       </div>
