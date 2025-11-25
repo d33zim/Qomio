@@ -29,7 +29,10 @@ export default function Hero() {
     e.preventDefault()
     // Wait for border-dissolve animation to complete (0.8s total)
     setTimeout(() => {
-      window.location.hash = href
+      const targetElement = document.querySelector(href)
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }, 800)
   }
 
