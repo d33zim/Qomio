@@ -41,7 +41,7 @@ export default function BackgroundAnimation() {
       >
         <div
           data-us-project="MSvSkmJb9Ax55PeV6eku"
-          className="w-full h-full scale-150 sm:scale-125 md:scale-110 lg:scale-100"
+          className="w-full h-full scale-[0.7] sm:scale-[0.8] md:scale-90 lg:scale-100"
           style={{
             transformOrigin: 'center center',
           }}
