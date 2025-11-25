@@ -25,6 +25,14 @@ export default function Hero() {
     },
   }
 
+  const handleButtonClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    // Wait for border-dissolve animation to complete (0.8s total)
+    setTimeout(() => {
+      window.location.hash = href
+    }, 800)
+  }
+
   return (
     <section className="relative overflow-hidden pt-32 pb-96 px-4 min-h-screen">
       <BackgroundAnimation />
@@ -68,12 +76,14 @@ export default function Hero() {
         <motion.div variants={itemVariants} className="flex flex-col sm:hidden gap-4 items-center">
           <Link
             href="#kontakt"
+            onClick={(e) => handleButtonClick(e, '#kontakt')}
             className="border-dissolve inline-block max-w-xs w-auto"
           >
             Jetzt Termin sichern
           </Link>
           <Link
             href="#leistungen"
+            onClick={(e) => handleButtonClick(e, '#leistungen')}
             className="border-dissolve inline-block max-w-xs w-auto"
           >
             Unsere Leistungen
@@ -91,12 +101,14 @@ export default function Hero() {
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 shrink-0">
           <Link
             href="#kontakt"
+            onClick={(e) => handleButtonClick(e, '#kontakt')}
             className="border-dissolve inline-block whitespace-nowrap"
           >
             Jetzt Termin sichern
           </Link>
           <Link
             href="#leistungen"
+            onClick={(e) => handleButtonClick(e, '#leistungen')}
             className="border-dissolve inline-block whitespace-nowrap"
           >
             Unsere Leistungen
