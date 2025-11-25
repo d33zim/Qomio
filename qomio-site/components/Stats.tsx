@@ -47,7 +47,7 @@ export default function Stats() {
 
   return (
     <motion.div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto relative z-20"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
