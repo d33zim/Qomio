@@ -41,7 +41,7 @@ export default function BackgroundAnimation() {
       >
         <div
           data-us-project="MSvSkmJb9Ax55PeV6eku"
-          className="absolute inset-0"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] min-w-full min-h-full"
         ></div>
       </div>
 
