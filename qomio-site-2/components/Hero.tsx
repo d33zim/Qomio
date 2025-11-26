@@ -85,7 +85,7 @@ export default function Hero() {
             <span className="hero-char">Apps &</span>
           </div>
           <div className="overflow-hidden">
-            <span className="hero-char">Automatisierung</span>
+            <span className="hero-char">Automation</span>
           </div>
         </h1>
 
