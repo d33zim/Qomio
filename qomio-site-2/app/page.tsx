@@ -9,6 +9,7 @@ import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
 import Cursor from '@/components/Cursor'
 import SmoothScroll from '@/components/SmoothScroll'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Loader />
       <Cursor />
       <SmoothScroll />
+      <WhatsAppButton />
       <main className="min-h-screen">
         <Navigation />
         <Hero />

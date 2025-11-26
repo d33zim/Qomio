@@ -1,11 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-
 const services = [
   {
     title: 'Webseiten, die überzeugen',
@@ -43,23 +37,6 @@ const services = [
 ]
 
 export default function Services() {
-  useEffect(() => {
-    const sections = document.querySelectorAll('section:not(:first-child)')
-    sections.forEach(section => {
-      gsap.from(section.querySelectorAll('h2, h3, p, .service-card, li'), {
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse'
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: 'power2.out'
-      })
-    })
-  }, [])
 
   return (
     <section id="leistungen" className="px-4 md:px-6 py-20 md:py-32 max-w-[1800px] mx-auto">
