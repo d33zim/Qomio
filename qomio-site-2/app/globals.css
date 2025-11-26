@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Base & Reset */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: #F5F5F5;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+}
+
+::selection {
+  background-color: #06b6d4;
+  color: white;
+}
+
+/* Custom Cursor */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  .cursor-dot,
+  .cursor-circle {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: exclusion;
+  }
+
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .cursor-circle {
+    width: 32px;
+    height: 32px;
+    border: 1px solid white;
+    border-radius: 50%;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+
+  body:hover .cursor-circle {
+    opacity: 1;
+  }
+
+  .hover-active .cursor-circle {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+  }
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-circle {
+    display: none !important;
+  }
+
+  body {
+    cursor: auto;
+  }
+}
+
+/* Typography & Utils */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Loader */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #111111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #F5F5F5;
+}
+
+/* Magnetic Button */
+.magnetic-btn {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Hero Character Reveal */
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(20px);
+  will-change: transform, opacity, filter;
+}
+
+/* Wispr-style Glow */
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0;
+}
+
+/* Marquee */
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Project Cards */
+.project-card .project-img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.5s;
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.03);
+}
+
+/* Service Cards */
+.service-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Mobile Fixes */
+.mobile-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .mobile-stack {
+    flex-direction: row;
+  }
+}
+
+/* Fade In Animation */
+.hero-fade-in {
+  opacity: 0;
+}
+
+/* Scrollbar Thin */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
