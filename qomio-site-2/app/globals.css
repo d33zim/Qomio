@@ -5,6 +5,17 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+/* Agency Font for Logo */
+@font-face {
+  font-family: 'Agency FB';
+  src: url('/fonts/agency-fb.woff2') format('woff2'),
+       url('/fonts/agency-fb.woff') format('woff'),
+       url('/fonts/agency-fb.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Base & Reset */
 html.lenis {
   height: auto;
@@ -200,4 +211,19 @@ body {
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Logo Styling */
+.logo-text {
+  font-family: 'Agency FB', 'Impact', 'Arial Black', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .logo-text {
+    font-size: 1.75rem;
+  }
 }
