@@ -1,5 +1,11 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const services = [
   {
     title: 'Webseiten, die überzeugen',
@@ -37,10 +43,87 @@ const services = [
 ]
 
 export default function Services() {
+  const headerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Animate header
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current.children,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      )
+    }
+
+    // Animate cards
+    if (cardsRef.current) {
+      const cards = cardsRef.current.querySelectorAll('.service-card')
+      gsap.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 75%',
+            once: true,
+          },
+        }
+      )
+
+      // Animate features list items
+      cards.forEach((card) => {
+        const listItems = card.querySelectorAll('li')
+        gsap.fromTo(
+          listItems,
+          {
+            opacity: 0,
+            x: -20,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 70%',
+              once: true,
+            },
+          }
+        )
+      })
+    }
+  }, [])
 
   return (
     <section id="leistungen" className="px-4 md:px-6 py-20 md:py-32 max-w-[1800px] mx-auto">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 border-b border-black/10 pb-6">
+      <div ref={headerRef} className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 border-b border-black/10 pb-6">
         <h2 className="text-4xl md:text-7xl font-semibold tracking-tighter uppercase">
           Unsere Leistungen
         </h2>
@@ -49,7 +132,7 @@ export default function Services() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div ref={cardsRef} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {services.map((service, index) => (
           <div
             key={index}

@@ -1,19 +1,77 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function Contact() {
+  const contentRef = useRef<HTMLDivElement>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Animate main content
+    if (contentRef.current) {
+      const elements = contentRef.current.querySelectorAll('.contact-element')
+      gsap.fromTo(
+        elements,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: 'top 70%',
+            once: true,
+          },
+        }
+      )
+    }
+
+    // Animate footer grid
+    if (footerRef.current) {
+      const items = footerRef.current.querySelectorAll('div > div')
+      gsap.fromTo(
+        items,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      )
+    }
+  }, [])
+
   return (
     <section id="kontakt" className="px-4 md:px-6 py-20 md:py-40 bg-[#F5F5F5] border-t border-black/5">
-      <div className="max-w-[1200px] mx-auto text-center">
-        <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-accent mb-6">
+      <div ref={contentRef} className="max-w-[1200px] mx-auto text-center">
+        <p className="contact-element font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-accent mb-6">
           Bereit durchzustarten?
         </p>
-        <h2 className="text-5xl md:text-9xl font-semibold tracking-tighter uppercase mb-10 md:mb-12 leading-none text-primary">
+        <h2 className="contact-element text-5xl md:text-9xl font-semibold tracking-tighter uppercase mb-10 md:mb-12 leading-none text-primary">
           Let&apos;s Work<br />Together
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 mb-8">
+        <div className="contact-element flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 mb-8">
           <Link
             href="mailto:kontakt@qomio.de"
             className="group flex items-center gap-3 text-lg md:text-2xl font-mono border-b border-black/20 pb-1 hover:border-accent hover:text-accent transition-all"
@@ -33,11 +91,11 @@ export default function Contact() {
           </Link>
         </div>
 
-        <p className="text-secondary text-sm md:text-base max-w-2xl mx-auto mb-10">
+        <p className="contact-element text-secondary text-sm md:text-base max-w-2xl mx-auto mb-10">
           Wir freuen uns auf Ihr Unternehmen aus Riedlingen, Biberach, Bad Saulgau, Ravensburg und Umgebung.
         </p>
 
-        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center md:text-left border-t border-black/5 pt-12">
+        <div ref={footerRef} className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center md:text-left border-t border-black/5 pt-12">
           <div>
             <h4 className="font-mono text-[10px] uppercase text-secondary mb-3">Leistungen</h4>
             <p className="text-sm md:text-base font-medium">Webseiten</p>

@@ -1,5 +1,11 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const steps = [
   {
     number: 1,
@@ -29,11 +35,63 @@ const steps = [
 ]
 
 export default function Process() {
+  const titleRef = useRef<HTMLDivElement>(null)
+  const stepsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Animate title
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current.children,
+        {
+          opacity: 0,
+          x: -50,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: 'top 75%',
+            once: true,
+          },
+        }
+      )
+    }
+
+    // Animate steps
+    if (stepsRef.current) {
+      const stepElements = stepsRef.current.querySelectorAll('.process-step')
+      gsap.fromTo(
+        stepElements,
+        {
+          opacity: 0,
+          x: 50,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: stepsRef.current,
+            start: 'top 70%',
+            once: true,
+          },
+        }
+      )
+    }
+  }, [])
+
   return (
     <section id="prozess" className="px-4 md:px-6 py-20 md:py-32 bg-white border-t border-black/5">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
         <div className="relative">
-          <div className="md:sticky md:top-32">
+          <div ref={titleRef} className="md:sticky md:top-32">
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tighter uppercase mb-6 md:mb-8">
               Unser<br />Prozess
             </h2>
@@ -44,9 +102,9 @@ export default function Process() {
           </div>
         </div>
 
-        <div className="space-y-12 md:space-y-16 border-l border-black/10 pl-6 md:pl-12 mt-4 md:mt-0">
+        <div ref={stepsRef} className="space-y-12 md:space-y-16 border-l border-black/10 pl-6 md:pl-12 mt-4 md:mt-0">
           {steps.map((step, index) => (
-            <div key={index} className="relative group">
+            <div key={index} className="relative group process-step">
               <div className="absolute -left-[1.95rem] md:-left-[3.25rem] top-1.5 md:top-2 w-2.5 h-2.5 md:w-3 md:h-3 bg-white border-2 border-accent rounded-full z-10 group-hover:bg-accent transition-colors"></div>
               <h3 className="text-xl md:text-2xl font-semibold tracking-tight">
                 {step.title}
