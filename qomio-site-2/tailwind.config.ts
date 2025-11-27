@@ -17,7 +17,8 @@ const config: Config = {
         surface: '#FFFFFF',
         primary: '#111111',
         secondary: '#555555',
-        accent: '#06b6d4', // Cyan-500 for Qomio
+        accent: '#06b6d4', // Cyan-500 for Qomio (used in non-blended contexts)
+        accentNoBlend: 'rgb(6, 182, 212)', // Same cyan but for hover states to bypass blend-difference calculation
         line: '#E0E0E0'
       },
       letterSpacing: {
