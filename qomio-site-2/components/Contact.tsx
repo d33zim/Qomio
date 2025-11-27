@@ -74,7 +74,7 @@ export default function Contact() {
         <div className="contact-element flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 mb-8">
           <Link
             href="mailto:kontakt@qomio.de"
-            className="group flex items-center gap-3 text-lg md:text-2xl font-mono border-b border-black/20 pb-1 hover:border-accent hover:text-accent transition-all"
+            className="group flex items-center gap-3 text-lg md:text-2xl font-mono border-b border-black/20 pb-1 hover:border-cyan-500 hover:text-cyan-500 active:border-cyan-600 active:text-cyan-600 focus:border-cyan-500 focus:text-cyan-500 transition-all"
           >
             <svg
               className="w-4 h-4 md:w-5 md:h-5"
