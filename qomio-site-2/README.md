@@ -74,8 +74,10 @@ qomio-site-2/
 │   ├── Process.tsx
 │   ├── Services.tsx
 │   ├── SmoothScroll.tsx
+│   ├── WhatsAppButton.tsx
 │   └── WhyUs.tsx
 └── public/
+    └── fonts/
 ```
 
 ## Tech Stack
@@ -86,3 +88,31 @@ qomio-site-2/
 - Tailwind CSS
 - GSAP (Animationen)
 - Lenis (Smooth Scrolling)
+
+## WhatsApp Button Konfiguration
+
+Der WhatsApp Button erscheint automatisch rechts unten, sobald der Benutzer 300px nach unten scrollt.
+
+### Telefonnummer ändern
+
+Öffne `components/WhatsAppButton.tsx` und ändere die Nummer in Zeile 24:
+
+```tsx
+const phoneNumber = '491234567890' // Beispiel: Deutsches Format
+```
+
+**Format:**
+- Ohne das `+` Zeichen
+- Mit Ländercode
+- Beispiele:
+  - Deutschland: `491234567890` (49 + Handynummer ohne führende 0)
+  - Österreich: `436641234567` (43 + Handynummer ohne führende 0)
+  - Schweiz: `41791234567` (41 + Handynummer ohne führende 0)
+
+### Nachricht anpassen
+
+Die Standard-Nachricht kann in Zeile 25 geändert werden:
+
+```tsx
+const message = encodeURIComponent('Hallo! Ich interessiere mich für Ihre Dienstleistungen.')
+```
