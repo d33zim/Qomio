@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
+import Cursor from '@/components/Cursor'
+import SmoothScroll from '@/components/SmoothScroll'
 
 export const metadata: Metadata = {
   title: 'Datenschutz - Qomio',
@@ -8,19 +12,14 @@ export const metadata: Metadata = {
 
 export default function Datenschutz() {
   return (
-    <main className="min-h-screen bg-background">
-      {/* Simple Header */}
-      <header className="fixed top-0 left-0 w-full px-4 md:px-6 py-5 bg-white/80 backdrop-blur-md border-b border-black/5 z-50">
-        <Link
-          href="/"
-          className="logo-text text-primary hover:text-cyan-500 transition-colors inline-block"
-        >
-          QOMIO
-        </Link>
-      </header>
+    <>
+      <Cursor />
+      <SmoothScroll />
+      <main className="min-h-screen bg-background">
+        <Navigation />
 
-      {/* Content */}
-      <div className="pt-24 pb-20 px-4 md:px-6">
+        {/* Content */}
+        <div className="pt-32 pb-20 px-4 md:px-6">
         <div className="max-w-[900px] mx-auto">
           {/* Header */}
           <div className="mb-16 md:mb-20 border-b border-black/10 pb-8">
@@ -173,6 +172,8 @@ export default function Datenschutz() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
+    </>
   )
 }
