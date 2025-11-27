@@ -7,7 +7,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 w-full px-4 md:px-6 py-5 flex justify-between items-center z-50 pointer-events-none">
       <Link
         href="/"
-        className="logo-text text-primary hover:text-cyan-500 active:text-cyan-600 focus:text-cyan-500 transition-colors pointer-events-auto"
+        className="logo-text text-primary hover:text-cyan-500 active:text-cyan-600 focus:text-cyan-500 transition-colors pointer-events-auto bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-black/10 shadow-sm"
       >
         QOMIO
       </Link>
