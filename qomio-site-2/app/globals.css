@@ -174,15 +174,6 @@ a, button, Link {
   }
 }
 
-/* Project Cards */
-.project-card .project-img {
-  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.5s;
-}
-
-.project-card:hover .project-img {
-  transform: scale(1.03);
-}
-
 /* Service Cards */
 .service-card {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -192,39 +183,9 @@ a, button, Link {
   transform: translateY(-4px);
 }
 
-/* Mobile Fixes */
-.mobile-stack {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 768px) {
-  .mobile-stack {
-    flex-direction: row;
-  }
-}
-
 /* Fade In Animation */
 .hero-fade-in {
   opacity: 0;
-}
-
-/* Scrollbar Thin */
-.scrollbar-thin::-webkit-scrollbar {
-  width: 4px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 2px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
 /* Logo Styling */

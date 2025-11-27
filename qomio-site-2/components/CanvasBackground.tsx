@@ -55,6 +55,8 @@ export default function CanvasBackground() {
       particles.push(new Particle(width, height))
     }
 
+    let animationFrameId: number
+
     const handleResize = () => {
       width = window.innerWidth
       height = window.innerHeight
@@ -69,9 +71,15 @@ export default function CanvasBackground() {
       ctx.strokeStyle = 'rgba(0,0,0,0.04)'
       ctx.lineWidth = 1
 
-      // Draw connections
+      // Update and draw particles
       for (let i = 0; i < particles.length; i++) {
-        for (let j = i; j < particles.length; j++) {
+        particles[i].update(width, height)
+        particles[i].draw(ctx)
+      }
+
+      // Draw connections (start from i+1 to avoid duplicate connections)
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
           const distance = Math.sqrt(dx * dx + dy * dy)
@@ -83,17 +91,16 @@ export default function CanvasBackground() {
             ctx.stroke()
           }
         }
-        particles[i].update(width, height)
-        particles[i].draw(ctx)
       }
 
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(animate)
     }
 
     animate()
 
     return () => {
       window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
