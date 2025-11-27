@@ -39,6 +39,14 @@ body {
   position: relative;
 }
 
+/* Remove orange tap highlight on mobile */
+a, button, Link {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 ::selection {
   background-color: #06b6d4;
   color: white;

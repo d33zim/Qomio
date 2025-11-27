@@ -109,7 +109,7 @@ export default function Hero() {
           </button>
           <Link
             href="#kontakt"
-            className="px-8 py-3 border border-black/10 bg-white rounded-full hover:bg-gray-100 transition-colors duration-200 magnetic-btn font-mono text-xs font-bold uppercase tracking-widest"
+            className="px-8 py-3 border border-black/10 bg-white rounded-full hover:bg-gray-100 active:bg-cyan-600 active:text-white focus:bg-cyan-500 focus:text-white transition-colors duration-200 magnetic-btn font-mono text-xs font-bold uppercase tracking-widest"
           >
             Jetzt anfragen
           </Link>
