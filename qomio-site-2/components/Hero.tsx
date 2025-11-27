@@ -102,7 +102,7 @@ export default function Hero() {
         {/* CTA Buttons */}
         <div className="mt-10 md:mt-14 flex gap-4 opacity-0 hero-fade-in">
           <button
-            className="px-8 py-3 bg-primary text-white rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-accent transition-colors duration-300 magnetic-btn"
+            className="px-8 py-3 bg-primary text-white rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500 transition-colors duration-300 magnetic-btn"
             onClick={() => document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Unsere Leistungen

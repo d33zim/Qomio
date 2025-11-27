@@ -34,7 +34,7 @@ export default function Navigation() {
         </div>
         <Link
           href="#kontakt"
-          className="bg-white text-black px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-colors duration-200 magnetic-btn shadow-lg"
+          className="bg-white text-black px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-white active:bg-cyan-600 focus:bg-cyan-500 focus:text-white transition-colors duration-200 magnetic-btn shadow-lg"
         >
           Kontakt
         </Link>
