@@ -7,7 +7,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 w-full px-4 md:px-6 py-5 flex justify-between items-center z-50 mix-blend-difference text-white pointer-events-none">
       <Link
         href="#"
-        className="logo-text hover:[color:rgb(6,182,212)] transition-colors pointer-events-auto"
+        className="logo-text hover:[color:rgb(239,63,33)] transition-colors pointer-events-auto"
       >
         QOMIO
       </Link>
@@ -15,19 +15,19 @@ export default function Navigation() {
         <div className="hidden md:flex gap-8 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/10">
           <Link
             href="#leistungen"
-            className="font-mono text-xs uppercase tracking-widest hover:[color:rgb(6,182,212)] transition-colors"
+            className="font-mono text-xs uppercase tracking-widest hover:[color:rgb(239,63,33)] transition-colors"
           >
             Leistungen
           </Link>
           <Link
             href="#prozess"
-            className="font-mono text-xs uppercase tracking-widest hover:[color:rgb(6,182,212)] transition-colors"
+            className="font-mono text-xs uppercase tracking-widest hover:[color:rgb(239,63,33)] transition-colors"
           >
             Prozess
           </Link>
           <Link
             href="#warum"
-            className="font-mono text-xs uppercase tracking-widest hover:[color:rgb(6,182,212)] transition-colors"
+            className="font-mono text-xs uppercase tracking-widest hover:[color:rgb(239,63,33)] transition-colors"
           >
             Warum
           </Link>
