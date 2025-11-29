@@ -24,22 +24,36 @@ export default function Cursor() {
 
       document.addEventListener('mousemove', handleMouseMove)
 
-      gsap.ticker.add(() => {
+      const tickerCallback = () => {
         cursorX += (mouseX - cursorX) * 0.2
         cursorY += (mouseY - cursorY) * 0.2
         cursorCircle.style.left = cursorX + 'px'
         cursorCircle.style.top = cursorY + 'px'
-      })
+      }
+
+      gsap.ticker.add(tickerCallback)
 
       // Hover effects
       const interactiveElements = document.querySelectorAll('a, button, .magnetic-btn')
+      const hoverHandlers = new Map<Element, { enter: EventListener; leave: EventListener }>()
+
       interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'))
-        el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'))
+        const enterHandler = () => document.body.classList.add('hover-active')
+        const leaveHandler = () => document.body.classList.remove('hover-active')
+
+        el.addEventListener('mouseenter', enterHandler)
+        el.addEventListener('mouseleave', leaveHandler)
+        hoverHandlers.set(el, { enter: enterHandler, leave: leaveHandler })
       })
 
+      // Cleanup function
       return () => {
         document.removeEventListener('mousemove', handleMouseMove)
+        gsap.ticker.remove(tickerCallback)
+        hoverHandlers.forEach((h, el) => {
+          el.removeEventListener('mouseenter', h.enter)
+          el.removeEventListener('mouseleave', h.leave)
+        })
       }
     }
   }, [])

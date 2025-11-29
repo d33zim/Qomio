@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
 /* Agency Font for Logo */
 @font-face {
   font-family: 'Agency FB';
@@ -33,7 +30,7 @@ body {
   color: #111111;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
   width: 100%;
   position: relative;

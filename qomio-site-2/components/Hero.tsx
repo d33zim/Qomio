@@ -34,8 +34,10 @@ export default function Hero() {
 
     // Magnetic button effect
     const magneticBtns = document.querySelectorAll('.magnetic-btn')
+    const handlers = new Map<Element, { move: EventListener; leave: EventListener }>()
+
     magneticBtns.forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
+      const moveHandler = (e: Event) => {
         const rect = (btn as HTMLElement).getBoundingClientRect()
         const mouseEvent = e as MouseEvent
         gsap.to(btn, {
@@ -43,16 +45,30 @@ export default function Hero() {
           y: (mouseEvent.clientY - rect.top - rect.height / 2) * 0.2,
           duration: 0.2
         })
-      })
-      btn.addEventListener('mouseleave', () => {
+      }
+
+      const leaveHandler = () => {
         gsap.to(btn, {
           x: 0,
           y: 0,
           duration: 0.5,
           ease: 'elastic.out(1, 0.3)'
         })
-      })
+      }
+
+      btn.addEventListener('mousemove', moveHandler)
+      btn.addEventListener('mouseleave', leaveHandler)
+      handlers.set(btn, { move: moveHandler, leave: leaveHandler })
     })
+
+    // Cleanup function
+    return () => {
+      tl.kill()
+      handlers.forEach((h, btn) => {
+        btn.removeEventListener('mousemove', h.move)
+        btn.removeEventListener('mouseleave', h.leave)
+      })
+    }
   }, [])
 
   return (
