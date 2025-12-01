@@ -10,14 +10,14 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-4">
         <Link
           href="/impressum"
-          className="font-mono text-[10px] text-white/60 hover:text-cyan-500 uppercase tracking-widest transition-colors"
+          className="font-mono text-[10px] text-white/60 hover:text-accent-warm uppercase tracking-widest transition-colors"
         >
           Impressum
         </Link>
         <span className="hidden md:inline text-white/20">•</span>
         <Link
           href="/datenschutz"
-          className="font-mono text-[10px] text-white/60 hover:text-cyan-500 uppercase tracking-widest transition-colors"
+          className="font-mono text-[10px] text-white/60 hover:text-accent-warm uppercase tracking-widest transition-colors"
         >
           Datenschutz
         </Link>

@@ -123,8 +123,8 @@ export default function Services() {
 
   return (
     <section id="leistungen" className="px-4 md:px-6 py-20 md:py-32 max-w-[1800px] mx-auto">
-      <div ref={headerRef} className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 border-b border-black/10 pb-6">
-        <h2 className="text-4xl md:text-7xl font-semibold tracking-tighter uppercase">
+      <div ref={headerRef} className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 border-b-2 border-primary/10 pb-6">
+        <h2 className="font-display text-4xl md:text-7xl font-bold tracking-tighter uppercase">
           Unsere Leistungen
         </h2>
         <span className="font-mono text-xs md:text-sm text-secondary mt-2 md:mt-0">
@@ -136,24 +136,24 @@ export default function Services() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="service-card bg-white border border-black/5 rounded-sm p-8 hover:border-accent/30 relative overflow-hidden group"
+            className="service-card bg-white border-2 border-line rounded-sm p-8 hover:border-accent hover:shadow-xl hover:shadow-accent/10 relative overflow-hidden group transition-all duration-300"
           >
-            {/* Glow effect on hover */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-accent/5 blur-[80px] pointer-events-none group-hover:bg-accent/10 transition-colors" />
+            {/* Bold glow effect on hover */}
+            <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 blur-[100px] pointer-events-none group-hover:bg-accent/15 transition-all duration-500" />
 
             <div className="relative z-10">
-              <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-2xl font-semibold tracking-tight mb-4">
+              <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
+              <h3 className="font-display text-2xl font-bold tracking-tight mb-4">
                 {service.title}
               </h3>
-              <p className="text-secondary text-sm leading-relaxed mb-6">
+              <p className="text-secondary text-base leading-relaxed mb-6">
                 {service.description}
               </p>
 
               <ul className="space-y-3">
                 {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-3 text-sm text-secondary">
-                    <span className="text-accent font-bold">✓</span>
+                  <li key={featureIndex} className="flex items-center gap-3 text-base text-secondary">
+                    <span className="text-accent text-lg font-bold">✓</span>
                     {feature}
                   </li>
                 ))}
