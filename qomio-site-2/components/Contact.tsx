@@ -67,14 +67,14 @@ export default function Contact() {
         <p className="contact-element font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-accent mb-6">
           Bereit durchzustarten?
         </p>
-        <h2 className="contact-element text-5xl md:text-9xl font-semibold tracking-tighter uppercase mb-10 md:mb-12 leading-none text-primary">
+        <h2 className="contact-element font-display text-5xl md:text-9xl font-bold tracking-tighter uppercase mb-10 md:mb-12 leading-none text-primary">
           Let&apos;s Work<br />Together
         </h2>
 
         <div className="contact-element flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 mb-8">
           <Link
             href="mailto:kontakt@qomio.de"
-            className="group flex items-center gap-3 text-lg md:text-2xl font-mono border-b border-black/20 pb-1 hover:border-cyan-500 hover:text-cyan-500 active:border-cyan-600 active:text-cyan-600 focus:border-cyan-500 focus:text-cyan-500 transition-all"
+            className="group flex items-center gap-3 text-lg md:text-2xl font-mono border-b-2 border-primary/20 pb-1 hover:border-accent hover:text-accent active:border-accent-deep active:text-accent-deep focus:border-accent focus:text-accent transition-all"
           >
             <svg
               className="w-4 h-4 md:w-5 md:h-5"
@@ -114,7 +114,7 @@ export default function Contact() {
           </div>
           <div className="col-span-2 md:col-span-1 flex items-end justify-center md:justify-end mt-4 md:mt-0">
             <button
-              className="w-10 h-10 md:w-12 md:h-12 border border-black/10 bg-white rounded-full flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-colors"
+              className="w-10 h-10 md:w-12 md:h-12 border-2 border-primary/10 bg-white rounded-full flex items-center justify-center hover:bg-accent hover:text-white hover:border-accent transition-all hover:scale-110"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <svg

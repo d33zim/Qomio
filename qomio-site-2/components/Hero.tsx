@@ -76,8 +76,8 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Main Title with Split Reveal */}
-        <h1 className="text-[13vw] md:text-[10vw] leading-[0.9] font-semibold tracking-tighter text-primary uppercase mix-blend-darken flex flex-col items-center">
+        {/* Main Title with Split Reveal - Bold Space Grotesk typography */}
+        <h1 className="font-display text-[13vw] md:text-[10vw] leading-[0.9] font-bold tracking-tighter text-primary uppercase mix-blend-darken flex flex-col items-center">
           <div className="overflow-hidden">
             <span className="hero-char">Webseiten,</span>
           </div>
@@ -99,17 +99,17 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - Bold accent colors */}
         <div className="mt-10 md:mt-14 flex gap-4 opacity-0 hero-fade-in">
           <button
-            className="px-8 py-3 bg-primary text-white rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-cyan-500 transition-colors duration-300 magnetic-btn"
+            className="px-8 py-3 bg-accent text-white rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-accent-deep transition-all duration-300 magnetic-btn shadow-lg hover:shadow-xl hover:shadow-accent/20"
             onClick={() => document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Unsere Leistungen
           </button>
           <Link
             href="#kontakt"
-            className="px-8 py-3 border border-black/10 bg-white rounded-full hover:bg-gray-100 active:bg-cyan-600 active:text-white focus:bg-cyan-500 focus:text-white transition-colors duration-200 magnetic-btn font-mono text-xs font-bold uppercase tracking-widest"
+            className="px-8 py-3 border-2 border-primary bg-white rounded-full hover:bg-primary hover:text-white active:bg-accent active:border-accent focus:bg-accent focus:border-accent focus:text-white transition-all duration-200 magnetic-btn font-mono text-xs font-bold uppercase tracking-widest"
           >
             Jetzt anfragen
           </Link>

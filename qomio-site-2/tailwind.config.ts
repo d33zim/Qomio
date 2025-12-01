@@ -8,16 +8,19 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'ui-monospace', 'monospace'],
       },
       colors: {
-        background: '#F5F5F5',
+        background: '#FAFAF8', // Warm off-white
         surface: '#FFFFFF',
-        primary: '#111111',
-        secondary: '#555555',
-        accent: '#06b6d4', // Cyan-500 for Qomio
-        line: '#E0E0E0'
+        primary: '#1A1A1A', // Deep charcoal
+        secondary: '#525252', // Medium grey
+        accent: '#FF5722', // Burnt orange - bold and distinctive!
+        'accent-warm': '#FF9800', // Amber accent
+        'accent-deep': '#E64A19', // Deeper orange
+        line: '#E5E5E0' // Subtle warm grey
       },
       letterSpacing: {
         tighter: '-0.04em',

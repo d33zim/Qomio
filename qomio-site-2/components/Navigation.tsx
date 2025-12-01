@@ -7,7 +7,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 w-full px-4 md:px-6 py-5 flex justify-between items-center z-50 mix-blend-difference text-white pointer-events-none">
       <Link
         href="/"
-        className="logo-text hover:text-orange-500 active:text-orange-600 focus:text-orange-500 transition-colors pointer-events-auto"
+        className="logo-text hover:text-accent-warm active:text-accent focus:text-accent transition-colors pointer-events-auto"
       >
         QOMIO
       </Link>
@@ -15,26 +15,26 @@ export default function Navigation() {
         <div className="hidden md:flex gap-8 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/10">
           <Link
             href="/#leistungen"
-            className="font-mono text-xs uppercase tracking-widest hover:text-orange-500 active:text-orange-600 focus:text-orange-500 transition-colors"
+            className="font-mono text-xs uppercase tracking-widest hover:text-accent-warm active:text-accent focus:text-accent transition-colors"
           >
             Leistungen
           </Link>
           <Link
             href="/#prozess"
-            className="font-mono text-xs uppercase tracking-widest hover:text-orange-500 active:text-orange-600 focus:text-orange-500 transition-colors"
+            className="font-mono text-xs uppercase tracking-widest hover:text-accent-warm active:text-accent focus:text-accent transition-colors"
           >
             Prozess
           </Link>
           <Link
             href="/#warum"
-            className="font-mono text-xs uppercase tracking-widest hover:text-orange-500 active:text-orange-600 focus:text-orange-500 transition-colors"
+            className="font-mono text-xs uppercase tracking-widest hover:text-accent-warm active:text-accent focus:text-accent transition-colors"
           >
             Warum
           </Link>
         </div>
         <Link
           href="/#kontakt"
-          className="bg-white text-black px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-orange-500 hover:text-white active:bg-orange-600 focus:bg-orange-500 focus:text-white transition-colors duration-200 magnetic-btn shadow-lg"
+          className="bg-white text-primary px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white active:bg-accent-deep focus:bg-accent focus:text-white transition-all duration-200 magnetic-btn shadow-lg"
         >
           Kontakt
         </Link>

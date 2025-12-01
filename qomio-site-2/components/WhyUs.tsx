@@ -86,8 +86,8 @@ export default function WhyUs() {
 
   return (
     <section id="warum" className="px-4 md:px-6 py-20 md:py-32 max-w-[1800px] mx-auto">
-      <div ref={headerRef} className="text-center mb-16 md:mb-24 border-b border-black/10 pb-6">
-        <h2 className="text-4xl md:text-7xl font-semibold tracking-tighter uppercase">
+      <div ref={headerRef} className="text-center mb-16 md:mb-24 border-b-2 border-primary/10 pb-6">
+        <h2 className="font-display text-4xl md:text-7xl font-bold tracking-tighter uppercase">
           Warum Qomio?
         </h2>
         <p className="text-secondary text-base md:text-lg mt-4">
@@ -99,13 +99,13 @@ export default function WhyUs() {
         {reasons.map((reason, index) => (
           <div
             key={index}
-            className="why-card bg-white border border-black/5 p-8 rounded-sm hover:border-accent/30 transition-all duration-300 hover:transform hover:-translate-y-1"
+            className="why-card bg-white border-2 border-line p-8 rounded-sm hover:border-accent hover:shadow-xl hover:shadow-accent/10 transition-all duration-300 hover:transform hover:-translate-y-2"
           >
-            <div className="text-3xl mb-4">{reason.icon}</div>
-            <h3 className="text-xl font-semibold text-primary mb-3">
+            <div className="text-4xl mb-6">{reason.icon}</div>
+            <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-3">
               {reason.title}
             </h3>
-            <p className="text-secondary text-sm md:text-base">
+            <p className="text-secondary text-base md:text-lg leading-relaxed">
               {reason.description}
             </p>
           </div>

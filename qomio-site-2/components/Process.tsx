@@ -92,10 +92,10 @@ export default function Process() {
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
         <div className="relative">
           <div ref={titleRef} className="md:sticky md:top-32">
-            <h2 className="text-4xl md:text-6xl font-semibold tracking-tighter uppercase mb-6 md:mb-8">
+            <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-6 md:mb-8">
               Unser<br />Prozess
             </h2>
-            <div className="w-12 md:w-16 h-1 bg-accent mb-6 md:mb-8"></div>
+            <div className="w-16 md:w-24 h-1.5 bg-accent mb-6 md:mb-8 rounded-full"></div>
             <p className="text-secondary text-base md:text-lg leading-relaxed">
               Klare Schritte, transparente Kommunikation – von der ersten Idee bis zum fertigen Produkt. So arbeiten wir mit Ihnen zusammen.
             </p>
@@ -105,14 +105,14 @@ export default function Process() {
         <div ref={stepsRef} className="space-y-12 md:space-y-16 border-l border-black/10 pl-6 md:pl-12 mt-4 md:mt-0">
           {steps.map((step, index) => (
             <div key={index} className="relative group process-step">
-              <div className="absolute -left-[1.95rem] md:-left-[3.25rem] top-1.5 md:top-2 w-2.5 h-2.5 md:w-3 md:h-3 bg-white border-2 border-accent rounded-full z-10 group-hover:bg-accent transition-colors"></div>
-              <h3 className="text-xl md:text-2xl font-semibold tracking-tight">
+              <div className="absolute -left-[1.95rem] md:-left-[3.25rem] top-1.5 md:top-2 w-3 h-3 md:w-4 md:h-4 bg-white border-2 border-accent rounded-full z-10 group-hover:bg-accent group-hover:scale-125 transition-all duration-300"></div>
+              <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight">
                 {step.title}
               </h3>
-              <p className="font-mono text-xs md:text-sm text-accent mt-1 mb-3 uppercase tracking-wider">
+              <p className="font-mono text-xs md:text-sm text-accent mt-1 mb-3 uppercase tracking-wider font-medium">
                 Schritt {step.number}
               </p>
-              <p className="text-secondary text-sm md:text-base">
+              <p className="text-secondary text-base md:text-lg leading-relaxed">
                 {step.description}
               </p>
             </div>
