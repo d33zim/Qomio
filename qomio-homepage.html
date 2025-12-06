@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qomio - Digitale Lösungen aus Riedlingen</title>
+  <meta name="description" content="Webseiten, Apps & Automatisierungslösungen für Unternehmen in Biberach, Bad Saulgau, Ravensburg und Umgebung.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: hidden;
+      width: 100%;
+      height: auto;
+    }
+
+    html.lenis {
+      height: auto;
+    }
+
+    .lenis.lenis-smooth {
+      scroll-behavior: auto;
+    }
+
+    body {
+      background-color: #FAFAF8;
+      color: #1A1A1A;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Remove tap highlight */
+    a, button {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    ::selection {
+      background-color: #FF5722;
+      color: white;
+    }
+
+    /* Custom Cursor */
+    @media (pointer: fine) {
+      body {
+        cursor: none;
+      }
+
+      .cursor-dot,
+      .cursor-circle {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: exclusion;
+      }
+
+      .cursor-dot {
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+      }
+
+      .cursor-circle {
+        width: 32px;
+        height: 32px;
+        border: 1px solid white;
+        border-radius: 50%;
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+      }
+
+      body.hover-active .cursor-circle {
+        width: 64px;
+        height: 64px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: transparent;
+      }
+    }
+
+    @media (pointer: coarse) {
+      .cursor-dot,
+      .cursor-circle {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto;
+      }
+    }
+
+    /* Loader */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: #111111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #F5F5F5;
+    }
+
+    /* Hero Animations */
+    .hero-char {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(20px);
+      will-change: transform, opacity, filter;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(255, 87, 34, 0.12) 0%, rgba(255, 152, 0, 0.06) 40%, rgba(255, 255, 255, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0;
+    }
+
+    .hero-fade-in {
+      opacity: 0;
+    }
+
+    /* Marquee */
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      width: max-content;
+      will-change: transform;
+      animation: marquee 40s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Service Cards */
+    .service-card {
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Logo */
+    .logo-text {
+      font-family: 'Space Grotesk', 'Impact', 'Arial Black', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .logo-text {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes ping {
+      75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .animate-pulse-slow {
+      animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .animate-bounce {
+      animation: bounce 1s infinite;
+    }
+
+    .animate-ping {
+      animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    /* Utility Classes */
+    .font-display {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'Fira Code', ui-monospace, monospace;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.25rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+      mix-blend-mode: difference;
+      color: white;
+      pointer-events: none;
+    }
+
+    nav a, nav button {
+      pointer-events: auto;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #FF9800;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-links a {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cta-btn {
+      background: white;
+      color: #1A1A1A;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      background: #FF5722;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: 0 1.5rem;
+      }
+    }
+
+    .hero-content {
+      max-width: 1800px;
+      margin: 0 auto;
+      width: 100%;
+      z-index: 10;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .status-badge {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 768px) {
+      .status-badge {
+        margin-bottom: 3rem;
+      }
+    }
+
+    .pulse-bars {
+      display: flex;
+      gap: 0.25rem;
+      height: 0.75rem;
+      align-items: center;
+    }
+
+    .pulse-bar {
+      width: 0.25rem;
+      background: #FF5722;
+      border-radius: 9999px;
+    }
+
+    .pulse-bar:nth-child(1) {
+      height: 100%;
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    .pulse-bar:nth-child(2) {
+      height: 66%;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    .pulse-bar:nth-child(3) {
+      height: 100%;
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+
+    .status-text {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #1A1A1A;
+      font-weight: 500;
+    }
+
+    @media (min-width: 768px) {
+      .status-text {
+        font-size: 0.75rem;
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13vw;
+      line-height: 0.9;
+      font-weight: bold;
+      letter-spacing: -0.04em;
+      color: #1A1A1A;
+      text-transform: uppercase;
+      mix-blend-mode: darken;
+    }
+
+    @media (min-width: 768px) {
+      .hero h1 {
+        font-size: 10vw;
+      }
+    }
+
+    .hero-subtitle {
+      margin-top: 2rem;
+      max-width: 48rem;
+      font-size: 1rem;
+      color: #525252;
+      line-height: 1.75;
+    }
+
+    @media (min-width: 768px) {
+      .hero-subtitle {
+        margin-top: 3rem;
+        font-size: 1.25rem;
+      }
+    }
+
+    .hero-subtitle span {
+      color: #1A1A1A;
+      font-weight: 500;
+    }
+
+    .hero-buttons {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .hero-buttons {
+        margin-top: 3.5rem;
+      }
+    }
+
+    .btn-primary {
+      padding: 0.75rem 2rem;
+      background: #FF5722;
+      color: white;
+      border-radius: 9999px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: #E64A19;
+      box-shadow: 0 20px 25px -5px rgba(255, 87, 34, 0.2);
+    }
+
+    .btn-secondary {
+      padding: 0.75rem 2rem;
+      border: 2px solid #1A1A1A;
+      background: white;
+      color: #1A1A1A;
+      border-radius: 9999px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      background: #1A1A1A;
+      color: white;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: rgba(82, 82, 82, 0.5);
+    }
+
+    /* Canvas */
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* Marquee Section */
+    .marquee {
+      padding: 1.5rem 0;
+      background: #1A1A1A;
+      color: white;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .marquee {
+        padding: 2rem 0;
+      }
+    }
+
+    .marquee-track {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+    }
+
+    @media (min-width: 768px) {
+      .marquee-track {
+        font-size: 0.875rem;
+      }
+    }
+
+    .marquee-track span {
+      display: inline-block;
+    }
+
+    .marquee-item {
+      margin: 0 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .marquee-item {
+        margin: 0 2rem;
+      }
+    }
+
+    .marquee-dot {
+      color: #FF5722;
+    }
+
+    /* Services Section */
+    .section {
+      padding: 5rem 1rem;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .section {
+        padding: 8rem 1.5rem;
+      }
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      border-bottom: 2px solid rgba(26, 26, 26, 0.1);
+      padding-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-header {
+        flex-direction: row;
+        margin-bottom: 6rem;
+      }
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.25rem;
+      font-weight: bold;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .section-title {
+        font-size: 4.5rem;
+      }
+    }
+
+    .section-subtitle {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: #525252;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-subtitle {
+        font-size: 0.875rem;
+        margin-top: 0;
+      }
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .service-card {
+      background: white;
+      border: 2px solid #E5E5E0;
+      border-radius: 0.125rem;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card:hover {
+      border-color: #FF5722;
+      box-shadow: 0 20px 25px -5px rgba(255, 87, 34, 0.1);
+    }
+
+    .service-glow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 12rem;
+      height: 12rem;
+      background: rgba(255, 87, 34, 0.05);
+      filter: blur(100px);
+      pointer-events: none;
+      transition: all 0.5s;
+    }
+
+    .service-card:hover .service-glow {
+      background: rgba(255, 87, 34, 0.15);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+    }
+
+    .service-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .service-card p {
+      color: #525252;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .service-features {
+      list-style: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #525252;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-features li span {
+      color: #FF5722;
+      font-size: 1.125rem;
+      font-weight: bold;
+    }
+
+    /* Process Section */
+    .process-section {
+      padding: 5rem 1rem;
+      background: white;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 768px) {
+      .process-section {
+        padding: 8rem 1.5rem;
+      }
+    }
+
+    .process-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .process-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6rem;
+      }
+    }
+
+    .process-title-wrapper {
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .process-title-wrapper {
+        position: sticky;
+        top: 8rem;
+      }
+    }
+
+    .process-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.25rem;
+      font-weight: bold;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .process-title {
+        font-size: 3.75rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .process-line {
+      width: 4rem;
+      height: 0.375rem;
+      background: #FF5722;
+      margin-bottom: 1.5rem;
+      border-radius: 9999px;
+    }
+
+    @media (min-width: 768px) {
+      .process-line {
+        width: 6rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .process-description {
+      color: #525252;
+      line-height: 1.75;
+    }
+
+    @media (min-width: 768px) {
+      .process-description {
+        font-size: 1.125rem;
+      }
+    }
+
+    .process-steps {
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      padding-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .process-steps {
+        padding-left: 3rem;
+        margin-top: 0;
+      }
+    }
+
+    .process-step {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .process-step {
+        margin-bottom: 4rem;
+      }
+    }
+
+    .process-dot {
+      position: absolute;
+      left: -1.95rem;
+      top: 0.375rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: white;
+      border: 2px solid #FF5722;
+      border-radius: 50%;
+      z-index: 10;
+      transition: all 0.3s;
+    }
+
+    @media (min-width: 768px) {
+      .process-dot {
+        left: -3.25rem;
+        top: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    .process-step:hover .process-dot {
+      background: #FF5722;
+      transform: scale(1.25);
+    }
+
+    .process-step h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 768px) {
+      .process-step h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .process-number {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: #FF5722;
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+
+    @media (min-width: 768px) {
+      .process-number {
+        font-size: 0.875rem;
+      }
+    }
+
+    .process-step p {
+      color: #525252;
+      line-height: 1.75;
+    }
+
+    @media (min-width: 768px) {
+      .process-step p {
+        font-size: 1.125rem;
+      }
+    }
+
+    /* Why Us Section */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .why-card {
+      background: white;
+      border: 2px solid #E5E5E0;
+      padding: 2rem;
+      border-radius: 0.125rem;
+      transition: all 0.3s;
+    }
+
+    .why-card:hover {
+      border-color: #FF5722;
+      box-shadow: 0 20px 25px -5px rgba(255, 87, 34, 0.1);
+      transform: translateY(-0.5rem);
+    }
+
+    .why-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .why-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #1A1A1A;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .why-card h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .why-card p {
+      color: #525252;
+      line-height: 1.75;
+    }
+
+    @media (min-width: 768px) {
+      .why-card p {
+        font-size: 1.125rem;
+      }
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 5rem 1rem;
+      background: #F5F5F5;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 768px) {
+      .contact-section {
+        padding: 10rem 1.5rem;
+      }
+    }
+
+    .contact-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #FF5722;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-label {
+        font-size: 0.75rem;
+      }
+    }
+
+    .contact-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: bold;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      line-height: 1;
+      color: #1A1A1A;
+    }
+
+    @media (min-width: 768px) {
+      .contact-title {
+        font-size: 9rem;
+        margin-bottom: 3rem;
+      }
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.125rem;
+      border-bottom: 2px solid rgba(26, 26, 26, 0.2);
+      padding-bottom: 0.25rem;
+      color: #1A1A1A;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-email {
+        font-size: 1.5rem;
+      }
+    }
+
+    .contact-email:hover {
+      border-color: #FF5722;
+      color: #FF5722;
+    }
+
+    .contact-email svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-email svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+
+    .contact-text {
+      color: #525252;
+      font-size: 0.875rem;
+      max-width: 42rem;
+      margin: 0 auto 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-text {
+        font-size: 1rem;
+      }
+    }
+
+    .contact-footer {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      padding-top: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-footer {
+        margin-top: 6rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        text-align: left;
+      }
+    }
+
+    .contact-footer h4 {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      color: #525252;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-footer p {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    @media (min-width: 768px) {
+      .contact-footer p {
+        font-size: 1rem;
+      }
+    }
+
+    .contact-footer .text-secondary {
+      color: #525252;
+    }
+
+    .scroll-top {
+      grid-column: span 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .scroll-top {
+        grid-column: span 1;
+        justify-content: flex-end;
+        margin-top: 0;
+      }
+    }
+
+    .scroll-top-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 2px solid rgba(26, 26, 26, 0.1);
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    @media (min-width: 768px) {
+      .scroll-top-btn {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    .scroll-top-btn:hover {
+      background: #FF5722;
+      color: white;
+      border-color: #FF5722;
+      transform: scale(1.1);
+    }
+
+    .scroll-top-btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1A1A1A;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-links {
+        flex-direction: row;
+        gap: 2rem;
+      }
+    }
+
+    .footer-links a {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.625rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #FF9800;
+    }
+
+    .footer-separator {
+      display: none;
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (min-width: 768px) {
+      .footer-separator {
+        display: inline;
+      }
+    }
+
+    .footer-copyright {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.625rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 50;
+      width: 3.5rem;
+      height: 3.5rem;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(4rem);
+      pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+      .whatsapp-btn {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+
+    .whatsapp-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .whatsapp-btn:hover {
+      background: #20BA5A;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .whatsapp-btn svg {
+      width: 1.75rem;
+      height: 1.75rem;
+      transition: transform 0.3s;
+    }
+
+    @media (min-width: 768px) {
+      .whatsapp-btn svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    .whatsapp-btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-tooltip {
+      position: absolute;
+      right: 100%;
+      margin-right: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      background: #111827;
+      color: white;
+      font-size: 0.75rem;
+      border-radius: 0.5rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    @media (min-width: 768px) {
+      .whatsapp-tooltip {
+        font-size: 0.875rem;
+      }
+    }
+
+    .whatsapp-btn:hover .whatsapp-tooltip {
+      opacity: 1;
+    }
+
+    .whatsapp-pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #25D366;
+      animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+      <div style="font-family: 'Fira Code', monospace; font-size: 3rem; font-weight: bold; letter-spacing: -0.04em;" id="loader-text">
+        0%
+      </div>
+      <div style="width: 8rem; height: 1px; background: #333; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background: #FF5722; width: 0;" id="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-circle"></div>
+
+  <!-- WhatsApp Button -->
+  <button class="whatsapp-btn" id="whatsapp-btn" aria-label="WhatsApp kontaktieren">
+    <svg fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+    <span class="whatsapp-tooltip">Per WhatsApp kontaktieren</span>
+    <span class="whatsapp-pulse"></span>
+  </button>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="/" class="logo-text">QOMIO</a>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <div class="nav-links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#prozess">Prozess</a>
+        <a href="#warum">Warum</a>
+      </div>
+      <a href="#kontakt" class="cta-btn magnetic-btn">Kontakt</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-glow animate-pulse-slow"></div>
+
+    <div class="hero-content">
+      <div class="status-badge hero-fade-in">
+        <div class="pulse-bars">
+          <span class="pulse-bar"></span>
+          <span class="pulse-bar"></span>
+          <span class="pulse-bar"></span>
+        </div>
+        <span class="status-text">Digitale Lösungen aus Riedlingen</span>
+      </div>
+
+      <h1>
+        <div style="overflow: hidden;">
+          <span class="hero-char">Webseiten,</span>
+        </div>
+        <div style="overflow: hidden;">
+          <span class="hero-char">Apps &</span>
+        </div>
+        <div style="overflow: hidden;">
+          <span class="hero-char">Automation</span>
+        </div>
+      </h1>
+
+      <div class="hero-subtitle hero-fade-in">
+        <p>
+          Wir entwickeln moderne Websites, individuelle Apps und effiziente Automatisierungslösungen – schnell, zuverlässig und transparent. Für Unternehmen in
+          <span>Biberach</span>,
+          <span>Bad Saulgau</span>,
+          <span>Ravensburg</span> und Umgebung.
+        </p>
+      </div>
+
+      <div class="hero-buttons hero-fade-in">
+        <button class="btn-primary magnetic-btn" onclick="document.getElementById('leistungen').scrollIntoView({ behavior: 'smooth' })">
+          Unsere Leistungen
+        </button>
+        <a href="#kontakt" class="btn-secondary magnetic-btn">
+          Jetzt anfragen
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator hero-fade-in">
+      <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span><span class="marquee-item">Next.js</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">React</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Vue.js</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">TypeScript</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Node.js</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Laravel</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Tailwind CSS</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">GSAP</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Automatisierung</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">App-Entwicklung</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Webseiten</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">APIs</span><span class="marquee-dot">•</span></span>
+      <!-- Duplicate for seamless loop -->
+      <span><span class="marquee-item">Next.js</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">React</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Vue.js</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">TypeScript</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Node.js</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Laravel</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Tailwind CSS</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">GSAP</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Automatisierung</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">App-Entwicklung</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">Webseiten</span><span class="marquee-dot">•</span></span>
+      <span><span class="marquee-item">APIs</span><span class="marquee-dot">•</span></span>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="leistungen" class="section">
+    <div class="section-header" id="services-header">
+      <h2 class="section-title">Unsere Leistungen</h2>
+      <span class="section-subtitle">(Digital Solutions)</span>
+    </div>
+
+    <div class="services-grid" id="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-glow"></div>
+        <div style="position: relative; z-index: 10;">
+          <div class="service-icon">🌐</div>
+          <h3>Webseiten, die überzeugen</h3>
+          <p>Moderne, schnelle und mobile-optimierte Websites, die professionell aussehen und einfach funktionieren.</p>
+          <ul class="service-features">
+            <li><span>✓</span> Individuelles Design</li>
+            <li><span>✓</span> Schnelle Performance</li>
+            <li><span>✓</span> Mobile Optimierung</li>
+            <li><span>✓</span> SEO-Basisoptimierung</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-glow"></div>
+        <div style="position: relative; z-index: 10;">
+          <div class="service-icon">📱</div>
+          <h3>App-Entwicklung für iOS, Android & Web</h3>
+          <p>Wir entwickeln maßgeschneiderte Apps — für interne Unternehmensprozesse oder als digitale Lösung für Ihre Kunden.</p>
+          <ul class="service-features">
+            <li><span>✓</span> Kunden-Apps</li>
+            <li><span>✓</span> Mitarbeiter-Tools</li>
+            <li><span>✓</span> Verwaltungs-Systeme</li>
+            <li><span>✓</span> Digitale Formulare</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-glow"></div>
+        <div style="position: relative; z-index: 10;">
+          <div class="service-icon">⚡</div>
+          <h3>Automatisierungs-Software & digitale Prozesse</h3>
+          <p>Viele Firmen arbeiten noch mit handgeschriebenen Notizen. Wir schaffen effektive Automatisierungstools.</p>
+          <ul class="service-features">
+            <li><span>✓</span> Automatische Angebotserstellung</li>
+            <li><span>✓</span> Auftragsverwaltung</li>
+            <li><span>✓</span> Rechnungsautomatisierung</li>
+            <li><span>✓</span> System-Schnittstellen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="prozess" class="process-section">
+    <div class="process-container">
+      <div class="process-title-wrapper" id="process-title">
+        <h2 class="process-title">Unser<br>Prozess</h2>
+        <div class="process-line"></div>
+        <p class="process-description">
+          Klare Schritte, transparente Kommunikation – von der ersten Idee bis zum fertigen Produkt. So arbeiten wir mit Ihnen zusammen.
+        </p>
+      </div>
+
+      <div class="process-steps" id="process-steps">
+        <div class="process-step">
+          <div class="process-dot"></div>
+          <h3>Kostenloses Erstgespräch</h3>
+          <p class="process-number">Schritt 1</p>
+          <p>Wir sprechen über Ihre Ziele, Ideen und Anforderungen – telefonisch, online oder persönlich vor Ort.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-dot"></div>
+          <h3>Konzept & Angebot</h3>
+          <p class="process-number">Schritt 2</p>
+          <p>Sie erhalten ein transparentes, verständliches Angebot ohne versteckte Kosten.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-dot"></div>
+          <h3>Umsetzung</h3>
+          <p class="process-number">Schritt 3</p>
+          <p>Wir entwickeln Ihre Website, App oder Software in klaren Schritten. Sie können jederzeit Feedback geben.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-dot"></div>
+          <h3>Launch & Übergabe</h3>
+          <p class="process-number">Schritt 4</p>
+          <p>Nach Freigabe veröffentlichen wir Ihr Projekt – sauber, sicher und technisch optimiert.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-dot"></div>
+          <h3>Support & Weiterentwicklung</h3>
+          <p class="process-number">Schritt 5</p>
+          <p>Auf Wunsch betreuen wir Ihr Projekt langfristig und entwickeln es weiter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us Section -->
+  <section id="warum" class="section">
+    <div class="section-header" id="why-header" style="text-align: center; display: block;">
+      <h2 class="section-title">Warum Qomio?</h2>
+      <p style="color: #525252; font-size: 1rem; margin-top: 1rem;">Die richtigen Partner für Ihre Digitalisierung</p>
+    </div>
+
+    <div class="why-grid" id="why-grid">
+      <div class="why-card">
+        <div class="why-card-icon">📍</div>
+        <h3>Regional & persönlich</h3>
+        <p>Wir kommen aus der Region Riedlingen. Kurze Wege, schnelle Abstimmung, persönliche Zusammenarbeit.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">🚀</div>
+        <h3>Modern & professionell</h3>
+        <p>Wir arbeiten mit aktuellen Technologien und entwickeln Lösungen, die lange funktionieren.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">💎</div>
+        <h3>Transparent & fair</h3>
+        <p>Klare Kommunikation, klare Preise, klare Ergebnisse. Keine Überraschungen, keine versteckten Kosten.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">⚡</div>
+        <h3>Flexibel & schnell</h3>
+        <p>Als kleines Team arbeiten wir effizient und reagieren ohne lange Wartezeiten.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="kontakt" class="contact-section">
+    <div class="contact-content" id="contact-content">
+      <p class="contact-label contact-element">Bereit durchzustarten?</p>
+      <h2 class="contact-title contact-element">Let's Work<br>Together</h2>
+
+      <div class="contact-element" style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+        <a href="mailto:kontakt@qomio.de" class="contact-email">
+          <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          kontakt@qomio.de
+        </a>
+      </div>
+
+      <p class="contact-text contact-element">
+        Wir freuen uns auf Ihr Unternehmen aus Riedlingen, Biberach, Bad Saulgau, Ravensburg und Umgebung.
+      </p>
+
+      <div class="contact-footer" id="contact-footer">
+        <div>
+          <h4>Leistungen</h4>
+          <p>Webseiten</p>
+          <p>Apps</p>
+          <p>Automatisierung</p>
+        </div>
+        <div>
+          <h4>Standort</h4>
+          <p>Riedlingen</p>
+          <p class="text-secondary">Baden-Württemberg</p>
+        </div>
+        <div>
+          <h4>Tech Stack</h4>
+          <p>React / Next.js</p>
+          <p>Vue / Nuxt</p>
+        </div>
+        <div class="scroll-top">
+          <button class="scroll-top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="/impressum">Impressum</a>
+      <span class="footer-separator">•</span>
+      <a href="/datenschutz">Datenschutz</a>
+    </div>
+    <p class="footer-copyright">
+      © 2025 Qomio - Digitale Lösungen aus Riedlingen.
+    </p>
+  </footer>
+
+  <script>
+    // Initialize GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Loader Animation
+    (function() {
+      const loaderProgress = document.getElementById('loader-progress');
+      const loaderText = document.getElementById('loader-text');
+      const loader = document.getElementById('loader');
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          loader.style.display = 'none';
+        }
+      });
+
+      tl.to(loaderProgress, {
+        width: '100%',
+        duration: 1.2,
+        ease: 'power2.inOut',
+        onUpdate: function() {
+          loaderText.innerText = Math.round((this.progress() || 0) * 100) + '%';
+        }
+      })
+      .to(loader, {
+        yPercent: -100,
+        duration: 0.6,
+        ease: 'power4.inOut',
+        delay: 0.1
+      });
+    })();
+
+    // Smooth Scroll with Lenis
+    const lenis = new Lenis({
+      duration: 0.7,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Custom Cursor
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorCircle = document.querySelector('.cursor-circle');
+
+      let mouseX = 0;
+      let mouseY = 0;
+      let cursorX = 0;
+      let cursorY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        gsap.to(cursorDot, { x: mouseX, y: mouseY, duration: 0 });
+      });
+
+      gsap.ticker.add(() => {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        cursorCircle.style.left = cursorX + 'px';
+        cursorCircle.style.top = cursorY + 'px';
+      });
+
+      const interactiveElements = document.querySelectorAll('a, button, .magnetic-btn');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+      });
+    }
+
+    // Canvas Background
+    (function() {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      class Particle {
+        constructor(width, height) {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = (Math.random() - 0.5) * 0.3;
+          this.size = Math.random() * 1.5;
+        }
+
+        update(width, height) {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0) this.x = width;
+          if (this.x > width) this.x = 0;
+          if (this.y < 0) this.y = height;
+          if (this.y > height) this.y = 0;
+        }
+
+        draw(ctx) {
+          ctx.fillStyle = '#cccccc';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      const particles = [];
+      for (let i = 0; i < 40; i++) {
+        particles.push(new Particle(width, height));
+      }
+
+      window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.strokeStyle = 'rgba(0,0,0,0.04)';
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update(width, height);
+          particles[i].draw(ctx);
+        }
+
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 100) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    })();
+
+    // Hero Animations
+    (function() {
+      const tl = gsap.timeline({ delay: 1.8 });
+
+      tl.to('.hero-glow', { opacity: 1, duration: 1.5, ease: 'power2.out' }, '-=0.5')
+        .to('.hero-char', {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        }, '-=1.0')
+        .to('.hero-fade-in', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }, '-=0.8');
+
+      // Magnetic button effect
+      const magneticBtns = document.querySelectorAll('.magnetic-btn');
+      magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          gsap.to(btn, {
+            x: (e.clientX - rect.left - rect.width / 2) * 0.2,
+            y: (e.clientY - rect.top - rect.height / 2) * 0.2,
+            duration: 0.2
+          });
+        });
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: 'elastic.out(1, 0.3)'
+          });
+        });
+      });
+    })();
+
+    // Services Animations
+    (function() {
+      const header = document.getElementById('services-header');
+      if (header) {
+        gsap.fromTo(
+          header.children,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: header,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      const grid = document.getElementById('services-grid');
+      if (grid) {
+        const cards = grid.querySelectorAll('.service-card');
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 60, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: grid,
+              start: 'top 75%',
+              once: true,
+            },
+          }
+        );
+
+        cards.forEach((card) => {
+          const listItems = card.querySelectorAll('li');
+          gsap.fromTo(
+            listItems,
+            { opacity: 0, x: -20 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.5,
+              stagger: 0.1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 70%',
+                once: true,
+              },
+            }
+          );
+        });
+      }
+    })();
+
+    // Process Animations
+    (function() {
+      const title = document.getElementById('process-title');
+      if (title) {
+        gsap.fromTo(
+          title.children,
+          { opacity: 0, x: -50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 75%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      const steps = document.getElementById('process-steps');
+      if (steps) {
+        const stepElements = steps.querySelectorAll('.process-step');
+        gsap.fromTo(
+          stepElements,
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: steps,
+              start: 'top 70%',
+              once: true,
+            },
+          }
+        );
+      }
+    })();
+
+    // Why Us Animations
+    (function() {
+      const header = document.getElementById('why-header');
+      if (header) {
+        gsap.fromTo(
+          header.children,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: header,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      const grid = document.getElementById('why-grid');
+      if (grid) {
+        const cards = grid.querySelectorAll('.why-card');
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 60, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: grid,
+              start: 'top 70%',
+              once: true,
+            },
+          }
+        );
+      }
+    })();
+
+    // Contact Animations
+    (function() {
+      const content = document.getElementById('contact-content');
+      if (content) {
+        const elements = content.querySelectorAll('.contact-element');
+        gsap.fromTo(
+          elements,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: content,
+              start: 'top 70%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      const footer = document.getElementById('contact-footer');
+      if (footer) {
+        const items = footer.querySelectorAll('div');
+        gsap.fromTo(
+          items,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: footer,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        );
+      }
+    })();
+
+    // WhatsApp Button
+    (function() {
+      const btn = document.getElementById('whatsapp-btn');
+
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+
+      btn.addEventListener('click', () => {
+        const phoneNumber = '4973719297483';
+        const message = encodeURIComponent('Hallo! Ich interessiere mich für Ihre Dienstleistungen.');
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+      });
+    })();
+  </script>
+</body>
+</html>
