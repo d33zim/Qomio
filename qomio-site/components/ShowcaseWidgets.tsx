@@ -1,20 +1,124 @@
 'use client'
 
-import { useState } from 'react'
-import { Calendar, Search, MapPin, TrendingUp, ShoppingCart, ArrowRight, Loader2, Star, Filter, Heart, MoreHorizontal, CheckSquare, Plus, Clock } from 'lucide-react'
+import { useState, useMemo } from 'react'
+import { Calendar as CalendarIcon, Search, MapPin, TrendingUp, ShoppingCart, ArrowRight, Loader2, Star, Filter, Heart, MoreHorizontal, CheckSquare, Plus, Clock, ChevronLeft, ChevronRight, X } from 'lucide-react'
 
-// --- 1. INTERACTIVE BOOKING WIDGET ---
+// --- HUMANIZED DATES & UTILS ---
+const formatDate = (d: Date) => d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })
+const getDaysDiff = (start: Date, end: Date) => Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)))
+
+// --- 1. INTERACTIVE BOOKING WIDGET (Advanced) ---
 export function BookingWidget() {
-    const [step, setStep] = useState<'search' | 'loading' | 'results'>('search')
+    const [step, setStep] = useState<'search' | 'loading' | 'results' | 'details' | 'success'>('search')
     const [guests, setGuests] = useState(2)
     const [destination, setDestination] = useState('Santorini, Griechenland')
+    const [selectedHotel, setSelectedHotel] = useState<number | null>(null)
+
+    // Date Logic
+    const [showCalendar, setShowCalendar] = useState(false)
+    const today = new Date()
+    const [dateRange, setDateRange] = useState<{ start: Date, end: Date }>({
+        start: new Date(today.getFullYear(), today.getMonth(), 24),
+        end: new Date(today.getFullYear(), today.getMonth(), 31) // Default 7 days
+    })
+
+    const nights = useMemo(() => getDaysDiff(dateRange.start, dateRange.end), [dateRange])
+
+    // Mock Data linked to calculation
+    const hotels = [
+        { id: 1, name: 'Villa Sunset Oia', price: 380, rating: 4.9, loc: 'Direkt am Meer', image: 'from-blue-100 to-slate-50' },
+        { id: 2, name: 'Grand Royal Hotel', price: 290, rating: 4.8, loc: 'Zentrumsnah', image: 'from-indigo-100 to-blue-50' },
+        { id: 3, name: 'Palm Beach Resort', price: 150, rating: 4.5, loc: 'Strandlage', image: 'from-cyan-100 to-blue-50' }
+    ]
+
+    const selectedHotelData = hotels.find(h => h.id === selectedHotel)
 
     const handleSearch = () => {
         setStep('loading')
-        setTimeout(() => setStep('results'), 1200)
+        setTimeout(() => setStep('results'), 800)
     }
 
-    const reset = () => setStep('search')
+    const selectHotel = (id: number) => {
+        setSelectedHotel(id)
+        setStep('details')
+    }
+
+    const confirmBooking = () => {
+        setStep('loading')
+        setTimeout(() => setStep('success'), 1500)
+    }
+
+    const reset = () => {
+        setStep('search')
+        setSelectedHotel(null)
+        setDateRange({
+            start: new Date(today.getFullYear(), today.getMonth(), 24),
+            end: new Date(today.getFullYear(), today.getMonth(), 31)
+        })
+    }
+
+    // Mini Calendar Component (Internal)
+    const MiniCalendar = () => {
+        const [viewDate, setViewDate] = useState(new Date(dateRange.start))
+        const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate()
+        const startDayOffset = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay() || 7 // 1 (Mon) - 7 (Sun)
+
+        const handleDayClick = (day: number) => {
+            const clickedDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), day)
+            // Simple logic: if start is selected and end is not (or clicking before start), reset. 
+            // For this demo: Always set start if it's a new interaction, then set end.
+            if (clickedDate.getTime() === dateRange.start.getTime()) return // No op
+
+            // If click is after start, set end. If before, set start and reset end to start+1
+            if (clickedDate > dateRange.start) {
+                setDateRange(prev => ({ ...prev, end: clickedDate }))
+                setShowCalendar(false)
+            } else {
+                const nextDay = new Date(clickedDate)
+                nextDay.setDate(clickedDate.getDate() + 1)
+                setDateRange({ start: clickedDate, end: nextDay })
+            }
+        }
+
+        return (
+            <div className="absolute top-16 left-4 right-4 bg-white rounded-xl shadow-xl border border-slate-200 p-4 z-50 animate-in zoom-in-95 duration-200">
+                <div className="flex items-center justify-between mb-4">
+                    <span className="font-bold text-slate-700">{viewDate.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })}</span>
+                    <div className="flex gap-1">
+                        <button onClick={() => setShowCalendar(false)} className="p-1 hover:bg-slate-100 rounded-lg"><X size={14} /></button>
+                    </div>
+                </div>
+                <div className="grid grid-cols-7 gap-1 text-center mb-2">
+                    {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(d => <span key={d} className="text-[10px] text-slate-400 font-bold">{d}</span>)}
+                </div>
+                <div className="grid grid-cols-7 gap-1">
+                    {Array.from({ length: startDayOffset - 1 }).map((_, i) => <div key={`empty-${i}`} />)}
+                    {Array.from({ length: daysInMonth }).map((_, i) => {
+                        const day = i + 1
+                        const current = new Date(viewDate.getFullYear(), viewDate.getMonth(), day)
+                        const isStart = current.getTime() === dateRange.start.getTime()
+                        const isEnd = current.getTime() === dateRange.end.getTime()
+                        const isInRange = current > dateRange.start && current < dateRange.end
+
+                        return (
+                            <button
+                                key={day}
+                                onClick={() => handleDayClick(day)}
+                                className={`text-xs w-8 h-8 rounded-full flex items-center justify-center transition-all
+                                    ${isStart || isEnd ? 'bg-accent text-white font-bold shadow-md' : isInRange ? 'bg-accent/10 text-accent font-medium' : 'text-slate-600 hover:bg-slate-100'}
+                                `}
+                            >
+                                {day}
+                            </button>
+                        )
+                    })}
+                </div>
+                <div className="mt-3 pt-3 border-t border-slate-100 text-center text-[10px] text-slate-400">
+                    Wähle An- und Abreise
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="w-full h-full bg-white rounded-xl shadow-sm border border-black/5 overflow-hidden flex flex-col font-sans select-none relative group/widget">
@@ -46,30 +150,37 @@ export function BookingWidget() {
                             </div>
                         </div>
 
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 relative">
                             <div className="flex-1 space-y-1.5">
                                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Datum</label>
-                                <div className="flex items-center gap-2 h-10 px-3 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-accent/30 transition-colors shadow-sm text-slate-700">
-                                    <Calendar size={14} className="text-accent" />
-                                    <span className="text-sm font-medium">24. - 31. Aug</span>
-                                </div>
+                                <button
+                                    onClick={() => setShowCalendar(!showCalendar)}
+                                    className={`w-full flex items-center gap-2 h-10 px-3 rounded-lg bg-white border cursor-pointer transition-all shadow-sm text-slate-700 ${showCalendar ? 'border-accent ring-2 ring-accent/10' : 'border-slate-200 hover:border-accent/30'}`}
+                                >
+                                    <CalendarIcon size={14} className="text-accent" />
+                                    <span className="text-xs font-medium truncate">
+                                        {dateRange.start.getDate()}. - {formatDate(dateRange.end)}
+                                    </span>
+                                </button>
                             </div>
                             <div className="w-1/3 space-y-1.5">
                                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Gäste</label>
                                 <div className="flex items-center justify-between h-10 px-1 rounded-lg bg-white border border-slate-200 shadow-sm">
-                                    <button onClick={() => setGuests(Math.max(1, guests - 1))} className="w-7 h-full hover:bg-slate-50 text-slate-400 hover:text-accent rounded-md transition-colors font-bold">-</button>
+                                    <button onClick={() => setGuests(Math.max(1, guests - 1))} className="w-6 h-full hover:bg-slate-50 text-slate-400 hover:text-accent rounded-md transition-colors font-bold">-</button>
                                     <span className="text-sm font-bold text-slate-700">{guests}</span>
-                                    <button onClick={() => setGuests(Math.min(10, guests + 1))} className="w-7 h-full hover:bg-slate-50 text-slate-400 hover:text-accent rounded-md transition-colors font-bold">+</button>
+                                    <button onClick={() => setGuests(Math.min(10, guests + 1))} className="w-6 h-full hover:bg-slate-50 text-slate-400 hover:text-accent rounded-md transition-colors font-bold">+</button>
                                 </div>
                             </div>
                         </div>
+
+                        {showCalendar && <MiniCalendar />}
 
                         <button
                             onClick={handleSearch}
                             className="w-full h-11 mt-4 bg-accent hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300"
                         >
                             <Search size={16} />
-                            Angebote suchen
+                            <span>{nights} Nächte suchen</span>
                         </button>
                     </div>
                 )}
@@ -82,7 +193,9 @@ export function BookingWidget() {
                                 <Search size={14} className="text-accent/50" />
                             </div>
                         </div>
-                        <span className="text-xs font-semibold text-slate-500 tracking-wide animate-pulse">Durchsuche Datenbank...</span>
+                        <span className="text-xs font-semibold text-slate-500 tracking-wide animate-pulse">
+                            {selectedHotel ? 'Buche Reise...' : `Suche für ${nights} Nächte...`}
+                        </span>
                     </div>
                 )}
 
@@ -90,8 +203,8 @@ export function BookingWidget() {
                     <div className="h-full flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-500 bg-slate-50/50">
                         <div className="p-3 border-b border-white/50 flex items-center justify-between bg-white/50 backdrop-blur-sm">
                             <div className="flex items-center gap-2">
-                                <span className="bg-accent/10 text-accent text-[10px] font-bold px-2 py-0.5 rounded-full">3 Treffer</span>
-                                <span className="text-xs text-slate-400 font-medium">in {destination.split(',')[0]}</span>
+                                <span className="bg-accent/10 text-accent text-[10px] font-bold px-2 py-0.5 rounded-full">{hotels.length} Treffer</span>
+                                <span className="text-xs text-slate-400 font-medium truncate max-w-[120px]">{destination.split(',')[0]}</span>
                             </div>
                             <button onClick={reset} className="p-1.5 hover:bg-slate-100 rounded-full text-slate-400 hover:text-slate-600 transition-colors">
                                 <Filter size={14} />
@@ -99,32 +212,35 @@ export function BookingWidget() {
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-3 space-y-3 custom-scrollbar">
-                            {[1, 2, 3].map((i) => (
-                                <div key={i} className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent/30 transition-all cursor-pointer group">
+                            {hotels.map((hotel) => (
+                                <div key={hotel.id} className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-accent/30 transition-all cursor-pointer group" onClick={() => selectHotel(hotel.id)}>
                                     <div className="flex gap-3">
                                         <div className="w-16 h-16 rounded-lg bg-slate-100 overflow-hidden relative shrink-0">
-                                            {/* Stylized Image Placeholders matching Blue Theme */}
-                                            <div className={`absolute inset-0 bg-gradient-to-br ${i === 1 ? 'from-blue-100 to-slate-50' : i === 2 ? 'from-indigo-100 to-blue-50' : 'from-cyan-100 to-blue-50'}`} />
+                                            {/* Stylized Image Placeholders */}
+                                            <div className={`absolute inset-0 bg-gradient-to-br ${hotel.image}`} />
                                             <div className="absolute top-1 right-1 bg-white/90 rounded-full p-1 shadow-sm">
                                                 <Heart size={8} className="text-slate-400 group-hover:text-accent group-hover:fill-accent transition-colors" />
                                             </div>
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex justify-between items-start mb-0.5">
-                                                <h5 className="text-xs font-bold text-slate-800 truncate pr-2">Villa {i === 1 ? 'Sunset Oia' : i === 2 ? 'Grand Royal' : 'Palm Beach'}</h5>
+                                                <h5 className="text-xs font-bold text-slate-800 truncate pr-2">{hotel.name}</h5>
                                                 <div className="flex items-center gap-0.5 text-[10px] font-bold text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded-full">
                                                     <Star size={8} className="fill-slate-700" />
-                                                    {i === 1 ? '4.9' : '4.8'}
+                                                    {hotel.rating}
                                                 </div>
                                             </div>
                                             <p className="text-[10px] text-slate-500 flex items-center gap-1 mb-2">
                                                 <MapPin size={8} />
-                                                {i === 1 ? 'Direkt am Meer' : 'Zentrumsnah'} • WLAN
+                                                {hotel.loc} • WLAN
                                             </p>
                                             <div className="flex items-end justify-between">
                                                 <div className="flex flex-col">
-                                                    <span className="text-[10px] text-slate-400 line-through">€{i === 1 ? '450' : '320'}</span>
-                                                    <span className="text-sm font-bold text-slate-900">€{i === 1 ? '380' : '290'}<span className="text-[10px] font-normal text-slate-400">/Nacht</span></span>
+                                                    <span className="text-[10px] text-slate-400 line-through">€{Math.round(hotel.price * 1.2)}</span>
+                                                    <div className="flex items-baseline gap-1">
+                                                        <span className="text-sm font-bold text-slate-900">€{hotel.price}</span>
+                                                        <span className="text-[10px] font-normal text-slate-400">/ Nacht</span>
+                                                    </div>
                                                 </div>
                                                 <button className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg group-hover:bg-accent transition-colors">
                                                     Wählen
@@ -135,6 +251,80 @@ export function BookingWidget() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                )}
+
+                {step === 'details' && selectedHotelData && (
+                    <div className="h-full flex flex-col p-6 animate-in slide-in-from-right-8 duration-500">
+                        <div className="flex items-center gap-3 mb-6">
+                            <button onClick={() => setStep('results')} className="p-1 -ml-1 hover:bg-slate-100 rounded-full text-slate-400 transition-colors">
+                                <ArrowRight className="rotate-180" size={16} />
+                            </button>
+                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Buchungsübersicht</span>
+                        </div>
+
+                        <div className="flex-1 space-y-4">
+                            <div className="flex gap-4">
+                                <div className={`w-20 h-20 rounded-xl bg-gradient-to-br ${selectedHotelData.image} shadow-sm shrink-0`} />
+                                <div>
+                                    <h4 className="font-bold text-slate-900">{selectedHotelData.name}</h4>
+                                    <p className="text-xs text-slate-500 mb-2">{selectedHotelData.loc}</p>
+                                    <div className="flex gap-1 text-[10px] font-bold text-amber-500">
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                            <Star key={i} size={10} fill={i < Math.floor(selectedHotelData.rating) ? "currentColor" : "none"} className={i >= Math.floor(selectedHotelData.rating) ? "text-slate-300" : ""} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-slate-50 rounded-xl p-4 space-y-2 border border-slate-100">
+                                <div className="flex justify-between text-xs">
+                                    <span className="text-slate-500">Zeitraum ({nights} Nächte)</span>
+                                    <span className="font-bold text-slate-700">{formatDate(dateRange.start)} - {formatDate(dateRange.end)}</span>
+                                </div>
+                                <div className="flex justify-between text-xs">
+                                    <span className="text-slate-500">Gäste</span>
+                                    <span className="font-bold text-slate-700">{guests} Personen</span>
+                                </div>
+                                <div className="w-full h-px bg-slate-200 my-2" />
+                                <div className="flex justify-between text-xs text-slate-500">
+                                    <span>{nights}x €{selectedHotelData.price}</span>
+                                    <span>€ {nights * selectedHotelData.price}</span>
+                                </div>
+                                <div className="flex justify-between text-xs text-slate-500">
+                                    <span>Servicegebühr</span>
+                                    <span>€ {Math.round(nights * selectedHotelData.price * 0.05)}</span>
+                                </div>
+                                <div className="w-full h-px bg-slate-200 my-1" />
+                                <div className="flex justify-between text-sm">
+                                    <span className="font-bold text-slate-900">Gesamt</span>
+                                    <span className="font-bold text-accent">€ {Math.round((nights * selectedHotelData.price) * 1.05)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={confirmBooking}
+                            className="w-full h-11 mt-4 bg-slate-900 hover:bg-accent active:scale-[0.98] text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-slate-900/10"
+                        >
+                            <CheckSquare size={16} />
+                            Verbindlich buchen
+                        </button>
+                    </div>
+                )}
+
+                {step === 'success' && (
+                    <div className="h-full flex flex-col items-center justify-center p-8 text-center animate-in zoom-in duration-500">
+                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4 shadow-sm">
+                            <CheckSquare size={40} />
+                        </div>
+                        <h4 className="text-xl font-bold text-slate-900 mb-2">Buchung bestätigt!</h4>
+                        <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+                            Wir haben Ihre Buchung für <b>{selectedHotelData?.name}</b> über <b>€ {selectedHotelData && Math.round((nights * selectedHotelData.price) * 1.05)}</b> erfolgreich entgegengenommen.
+                        </p>
+                        <button onClick={reset} className="text-xs font-bold text-slate-400 hover:text-slate-600">
+                            Neue Suche starten
+                        </button>
                     </div>
                 )}
             </div>
@@ -398,45 +588,47 @@ export function EnterpriseWidget() {
                 </button>
             </div>
 
-            {/* Kanban Board */}
-            <div className="flex-1 p-4 grid grid-cols-3 gap-3 overflow-hidden ml-12">
-                {['todo', 'review', 'done'].map((status) => (
-                    <div key={status} className="flex flex-col h-full">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                                {status === 'todo' ? 'To Do' : status === 'review' ? 'In Review' : 'Done'}
-                            </span>
-                            <span className="text-[10px] font-mono text-slate-300 bg-slate-100 px-1.5 rounded-full">{getColConfig(status).length}</span>
-                        </div>
+            {/* Kanban Board with Horizontal Scroll for Mobile */}
+            <div className="flex-1 p-4 overflow-x-auto">
+                <div className="grid grid-cols-3 gap-3 min-w-[360px] h-full">
+                    {['todo', 'review', 'done'].map((status) => (
+                        <div key={status} className="flex flex-col h-full">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                    {status === 'todo' ? 'To Do' : status === 'review' ? 'In Review' : 'Done'}
+                                </span>
+                                <span className="text-[10px] font-mono text-slate-300 bg-slate-100 px-1.5 rounded-full">{getColConfig(status).length}</span>
+                            </div>
 
-                        <div className="flex-1 bg-slate-100/50 rounded-lg p-2 space-y-2 border border-black/5">
-                            {getColConfig(status).map(task => (
-                                <div
-                                    key={task.id}
-                                    onClick={() => moveTask(task.id)}
-                                    className="bg-white p-3 rounded-lg border border-slate-200 shadow-sm cursor-pointer hover:-translate-y-0.5 hover:shadow-md hover:border-blue-300 transition-all group"
-                                >
-                                    <div className="flex justify-between items-start mb-2">
-                                        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${getStatusColor(task.status)}`}>
-                                            {task.tag}
-                                        </span>
-                                        <MoreHorizontal size={12} className="text-slate-300" />
+                            <div className="flex-1 bg-slate-100/50 rounded-lg p-2 space-y-2 border border-black/5">
+                                {getColConfig(status).map(task => (
+                                    <div
+                                        key={task.id}
+                                        onClick={() => moveTask(task.id)}
+                                        className="bg-white p-3 rounded-lg border border-slate-200 shadow-sm cursor-pointer hover:-translate-y-0.5 hover:shadow-md hover:border-blue-300 transition-all group"
+                                    >
+                                        <div className="flex justify-between items-start mb-2">
+                                            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${getStatusColor(task.status)}`}>
+                                                {task.tag}
+                                            </span>
+                                            <MoreHorizontal size={12} className="text-slate-300" />
+                                        </div>
+                                        <p className="text-xs font-bold text-slate-700 leading-tight mb-2 group-hover:text-blue-600 transition-colors">{task.title}</p>
+                                        <div className="flex items-center gap-1.5">
+                                            <div className="w-4 h-4 rounded-full bg-slate-200 border border-white" />
+                                            <span className="text-[9px] text-slate-400 font-medium">Due Today</span>
+                                        </div>
                                     </div>
-                                    <p className="text-xs font-bold text-slate-700 leading-tight mb-2 group-hover:text-blue-600 transition-colors">{task.title}</p>
-                                    <div className="flex items-center gap-1.5">
-                                        <div className="w-4 h-4 rounded-full bg-slate-200 border border-white" />
-                                        <span className="text-[9px] text-slate-400 font-medium">Due Today</span>
+                                ))}
+                                {status === 'todo' && (
+                                    <div className="border border-dashed border-slate-300 rounded-lg p-2 flex items-center justify-center text-slate-400 hover:bg-white hover:text-blue-500 hover:border-blue-300 cursor-pointer transition-colors">
+                                        <Plus size={14} />
                                     </div>
-                                </div>
-                            ))}
-                            {status === 'todo' && (
-                                <div className="border border-dashed border-slate-300 rounded-lg p-2 flex items-center justify-center text-slate-400 hover:bg-white hover:text-blue-500 hover:border-blue-300 cursor-pointer transition-colors">
-                                    <Plus size={14} />
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     )

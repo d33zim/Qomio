@@ -117,14 +117,14 @@ export default function Showcase() {
                     >
 
                         {/* Widget Area - Interactive */}
-                        <div className="relative h-[340px] md:h-[400px] bg-slate-100 overflow-hidden p-6 md:p-8 flex items-center justify-center border-b border-black/5 z-20">
+                        <div className="relative h-[450px] bg-slate-100 overflow-hidden p-6 md:p-8 flex items-center justify-center border-b border-black/5 z-20">
                             <div className="w-full h-full transform transition-transform duration-500 hover:scale-[1.01] shadow-xl rounded-xl">
                                 {project.Widget && <project.Widget />}
                             </div>
                         </div>
 
                         {/* Content Area */}
-                        <div className="p-8 relative z-10 flex flex-col h-[240px]">
+                        <div className="p-6 md:p-8 relative z-10 flex flex-col min-h-[240px] h-auto md:h-[240px]">
                             <div>
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-xs font-mono uppercase text-accent tracking-widest">{project.category}</span>
