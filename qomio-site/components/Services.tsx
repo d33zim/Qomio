@@ -171,26 +171,28 @@ export default function Services() {
             </div>
 
             {/* Content Area */}
-            <div className="p-8 md:p-10 flex-1 flex flex-col relative z-20 bg-white/50 backdrop-blur-sm">
+            <div className="p-8 md:p-10 flex-1 flex flex-col relative z-20 bg-white/50 backdrop-blur-sm text-center">
               <h3 className="font-display text-2xl font-bold tracking-tight mb-4 group-hover:text-accent transition-colors duration-300">
                 {service.title}
               </h3>
-              <p className="text-secondary text-base leading-relaxed mb-8 text-balance">
+              <p className="text-secondary text-base leading-relaxed mb-8 text-balance mx-auto max-w-sm">
                 {service.description}
               </p>
 
-              <ul className="space-y-4 mt-auto">
-                {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-3 text-sm font-medium text-secondary/90">
-                    <div className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0">
-                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 4L3.5 6.5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-auto">
+                <ul className="space-y-4 text-left inline-block">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center gap-3 text-sm font-medium text-secondary/90">
+                      <div className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0 text-[10px]">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 4L3.5 6.5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         ))}
