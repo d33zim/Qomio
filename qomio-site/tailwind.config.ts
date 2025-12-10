@@ -2,44 +2,41 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['Fira Code', 'ui-monospace', 'monospace'],
+      },
       colors: {
-        'dark': '#030303',
-        'dark-secondary': '#0A0A0A',
-        'dark-tertiary': '#1A1A1A',
+        background: '#FAFAF8', // Warm off-white
+        surface: '#FFFFFF',
+        primary: '#1A1A1A', // Deep charcoal
+        secondary: '#525252', // Medium grey
+        accent: '#2563EB', // Blue-600 - Bold and professional
+        'accent-warm': '#60A5FA', // Blue-400 (Light blue accent)
+        'accent-deep': '#1E40AF', // Blue-800 (Deep blue)
+        line: '#E5E5E0' // Subtle warm grey
+      },
+      letterSpacing: {
+        tighter: '-0.04em',
+        tight: '-0.02em',
+      },
+      transitionTimingFunction: {
+        'spring': 'cubic-bezier(0.25, 0.8, 0.25, 1)',
       },
       animation: {
-        'fade-slide-in': 'fadeSlideIn 0.8s ease-out forwards',
-        'beam-v': 'beamV 6s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-        'beam-h': 'beamH 6s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-        'beam-h-rev': 'beamHRev 6s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'marquee': 'marquee 40s linear infinite',
       },
       keyframes: {
-        fadeSlideIn: {
-          '0%': { opacity: '0', transform: 'translateY(30px)', filter: 'blur(8px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0px)' },
-        },
-        beamV: {
-          '0%': { top: '-150px', opacity: '0' },
-          '10%': { opacity: '1' },
-          '90%': { opacity: '1' },
-          '100%': { top: '100%', opacity: '0' },
-        },
-        beamH: {
-          '0%': { left: '-150px', opacity: '0' },
-          '10%': { opacity: '1' },
-          '90%': { opacity: '1' },
-          '100%': { left: '100%', opacity: '0' },
-        },
-        beamHRev: {
-          '0%': { right: '-150px', opacity: '0' },
-          '10%': { opacity: '1' },
-          '90%': { opacity: '1' },
-          '100%': { right: '100%', opacity: '0' },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
     },

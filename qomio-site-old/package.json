@@ -1,9 +1,9 @@
 {
-  "name": "qomio-site-2",
+  "name": "qomio-site",
   "version": "1.0.0",
-  "description": "Qomio Website mit minimalistischem Kyriakos-Style",
+  "description": "Professionelle Website für Qomio - Digitale Lösungen",
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,8 +12,8 @@
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "gsap": "^3.12.5",
-    "@studio-freight/lenis": "^1.0.33"
+    "framer-motion": "^10.16.0",
+    "@heroicons/react": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

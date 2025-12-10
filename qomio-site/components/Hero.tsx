@@ -1,116 +1,135 @@
 'use client'
 
+import { useEffect } from 'react'
+import { gsap } from 'gsap'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import BackgroundAnimation from './BackgroundAnimation'
-import Stats from './Stats'
+import CanvasBackground from './CanvasBackground'
 
 export default function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
+  useEffect(() => {
+    // Hero Animation Timeline
+    const tl = gsap.timeline({ delay: 1.8 })
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
+    // Wispr Glow
+    tl.to('.hero-glow', { opacity: 1, duration: 1.5, ease: 'power2.out' }, '-=0.5')
+
+    // Character reveal with blur-to-focus
+    .to('.hero-char', {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  }
+      filter: 'blur(0px)',
+      duration: 1.2,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }, '-=1.0')
+
+    // Fade in other elements
+    .to('.hero-fade-in', {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power2.out'
+    }, '-=0.8')
+
+    // Magnetic button effect
+    const magneticBtns = document.querySelectorAll('.magnetic-btn')
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = (btn as HTMLElement).getBoundingClientRect()
+        const mouseEvent = e as MouseEvent
+        gsap.to(btn, {
+          x: (mouseEvent.clientX - rect.left - rect.width / 2) * 0.2,
+          y: (mouseEvent.clientY - rect.top - rect.height / 2) * 0.2,
+          duration: 0.2
+        })
+      })
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.3)'
+        })
+      })
+    })
+  }, [])
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-96 px-4 min-h-screen">
-      <BackgroundAnimation />
-      <motion.div
-        className="max-w-5xl mx-auto relative z-10 text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Badge */}
-        <motion.div
-          variants={itemVariants}
-          className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/30 bg-cyan-950/20 mb-10 rounded-full"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full bg-cyan-400 opacity-50" />
-            <span className="relative inline-flex h-2 w-2 bg-cyan-500" />
-          </span>
-          <span className="text-xs font-medium text-cyan-300 uppercase tracking-widest">
+    <section className="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-6 pt-8 md:pt-0 overflow-hidden">
+      {/* Canvas Background */}
+      <CanvasBackground />
+
+      {/* Wispr Glow Blob */}
+      <div className="hero-glow animate-pulse-slow"></div>
+
+      <div className="max-w-[1800px] mx-auto w-full z-10 relative flex flex-col items-center text-center">
+        {/* Floating Status Badge */}
+        <div className="mb-8 md:mb-12 flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md border border-white/20 shadow-sm opacity-0 hero-fade-in">
+          <div className="flex gap-1 h-3 items-center">
+            <span className="w-1 h-full bg-accent rounded-full animate-[pulse_1s_ease-in-out_infinite]"></span>
+            <span className="w-1 h-2/3 bg-accent rounded-full animate-[pulse_1.2s_ease-in-out_infinite]"></span>
+            <span className="w-1 h-full bg-accent rounded-full animate-[pulse_0.8s_ease-in-out_infinite]"></span>
+          </div>
+          <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-primary font-medium">
             Digitale Lösungen aus Riedlingen
           </span>
-        </motion.div>
-
-        {/* Heading */}
-        <motion.h1
-          variants={itemVariants}
-          className="md:text-7xl lg:text-8xl leading-[1.1] text-5xl font-bold tracking-tight mb-6 gradient-text"
-        >
-          Webseiten, Apps & Automatisierungslösungen
-        </motion.h1>
-
-        {/* Subheading */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto font-medium leading-relaxed mb-12"
-        >
-          Wir entwickeln moderne Websites, individuelle Apps und effiziente Automatisierungslösungen – schnell, zuverlässig und transparent. Für Unternehmen in Biberach, Bad Saulgau, Ravensburg und Umgebung.
-        </motion.p>
-
-        {/* Mobile buttons without beams */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:hidden gap-4 items-center">
-          <Link
-            href="#kontakt"
-            className="border-dissolve inline-block max-w-xs w-auto"
-          >
-            Jetzt Termin sichern
-          </Link>
-          <Link
-            href="#leistungen"
-            className="border-dissolve inline-block max-w-xs w-auto"
-          >
-            Unsere Leistungen
-          </Link>
-        </motion.div>
-      </motion.div>
-
-      {/* CTA Buttons with beams - with proper spacing from edges */}
-      <div className="w-full px-4 sm:px-8 lg:px-16 flex flex-col sm:flex-row gap-4 justify-center items-center hidden sm:flex relative z-10">
-        {/* Left beam */}
-        <div className="h-px pointer-events-none bg-gradient-to-r from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative min-w-[80px]">
-          <div className="absolute h-full w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-beam-h"></div>
         </div>
 
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 shrink-0">
-          <Link
-            href="#kontakt"
-            className="border-dissolve inline-block whitespace-nowrap"
-          >
-            Jetzt Termin sichern
-          </Link>
-          <Link
-            href="#leistungen"
-            className="border-dissolve inline-block whitespace-nowrap"
+        {/* Main Title with Split Reveal - Bold Space Grotesk typography */}
+        <h1 className="font-display text-[13vw] md:text-[10vw] leading-[0.9] font-bold tracking-tighter text-primary uppercase mix-blend-darken flex flex-col items-center">
+          <div className="overflow-hidden">
+            <span className="hero-char">Webseiten,</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="hero-char">Apps &</span>
+          </div>
+          <div className="overflow-hidden">
+            <span className="hero-char">Automation</span>
+          </div>
+        </h1>
+
+        {/* Subtitle */}
+        <div className="mt-8 md:mt-12 max-w-3xl mx-auto opacity-0 hero-fade-in">
+          <p className="font-sans text-base md:text-xl text-secondary leading-relaxed text-balance">
+            Wir entwickeln moderne Websites, individuelle Apps und effiziente Automatisierungslösungen – schnell, zuverlässig und transparent. Für Unternehmen in{' '}
+            <span className="text-primary font-medium">Biberach</span>,{' '}
+            <span className="text-primary font-medium">Bad Saulgau</span>,{' '}
+            <span className="text-primary font-medium">Ravensburg</span> und Umgebung.
+          </p>
+        </div>
+
+        {/* CTA Buttons - Bold accent colors */}
+        <div className="mt-10 md:mt-14 flex gap-4 opacity-0 hero-fade-in">
+          <button
+            className="px-8 py-3 bg-accent text-white rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-accent-deep transition-all duration-300 magnetic-btn shadow-lg hover:shadow-xl hover:shadow-accent/20"
+            onClick={() => document.getElementById('leistungen')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Unsere Leistungen
+          </button>
+          <Link
+            href="#kontakt"
+            className="px-8 py-3 border-2 border-primary bg-white rounded-full hover:bg-primary hover:text-white active:bg-accent active:border-accent focus:bg-accent focus:border-accent focus:text-white transition-all duration-200 magnetic-btn font-mono text-xs font-bold uppercase tracking-widest"
+          >
+            Jetzt anfragen
           </Link>
-        </motion.div>
-
-        {/* Right beam */}
-        <div className="h-px pointer-events-none bg-gradient-to-l from-transparent via-zinc-800 to-transparent flex-1 overflow-hidden relative min-w-[80px]">
-          <div className="absolute h-full w-32 bg-gradient-to-l from-transparent via-cyan-500 to-transparent animate-beam-h-rev"></div>
         </div>
       </div>
 
-      {/* Stats Section */}
-      <Stats />
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 hero-fade-in animate-bounce">
+        <svg
+          className="w-5 h-5 text-secondary/50"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
     </section>
   )
 }
