@@ -4,62 +4,49 @@ import { Zap } from 'lucide-react'
 
 export default function AutomationIllustration() {
     return (
-        <svg viewBox="0 0 900 360" className="w-full h-full text-accent" fill="none">
-            <circle cx="150" cy="30" r="4" fill="currentColor" className="drop-shadow-[0_0_8px_rgba(37,99,235,0.5)]">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" begin="0s" repeatCount="indefinite"></animate>
-            </circle>
-            <circle cx="270" cy="30" r="4" fill="currentColor" className="drop-shadow-[0_0_8px_rgba(37,99,235,0.5)]">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" begin="0.2s" repeatCount="indefinite"></animate>
-            </circle>
-            <circle cx="390" cy="30" r="4" fill="currentColor" className="drop-shadow-[0_0_8px_rgba(37,99,235,0.5)]">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" begin="0.4s" repeatCount="indefinite"></animate>
-            </circle>
-            <circle cx="510" cy="30" r="4" fill="currentColor" className="drop-shadow-[0_0_8px_rgba(37,99,235,0.5)]">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" begin="0.6000000000000001s" repeatCount="indefinite"></animate>
-            </circle>
-            <circle cx="630" cy="30" r="4" fill="currentColor" className="drop-shadow-[0_0_8px_rgba(37,99,235,0.5)]">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" begin="0.8s" repeatCount="indefinite"></animate>
-            </circle>
-            <circle cx="750" cy="30" r="4" fill="currentColor" className="drop-shadow-[0_0_8px_rgba(37,99,235,0.5)]">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" begin="1s" repeatCount="indefinite"></animate>
-            </circle>
+        <svg viewBox="0 0 400 300" className="w-full h-full text-accent" fill="none">
+            {/* Background Network Mesh */}
+            <defs>
+                <pattern id="grid-dots" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1" fill="currentColor" opacity="0.1" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-dots)" />
 
-            <path d="M450 300 C 450 200, 300 120, 150 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.2" fill="none"></path>
-            <path d="M450 300 C 450 200, 300 120, 150 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" style={{ strokeDasharray: 600, strokeDashoffset: 600 }}>
-                <animate attributeName="stroke-dashoffset" values="600;0;600" dur="6s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
-            </path>
+            {/* Central Hub Pulse */}
+            <g transform="translate(200, 150)">
+                <circle r="30" fill="currentColor" opacity="0.1">
+                    <animate attributeName="r" values="30;50;30" dur="4s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.1;0;0.1" dur="4s" repeatCount="indefinite" />
+                </circle>
+                <circle r="40" fill="currentColor" opacity="0.05">
+                    <animate attributeName="r" values="40;70;40" dur="4s" repeatCount="indefinite" begin="1s" />
+                    <animate attributeName="opacity" values="0.05;0;0.05" dur="4s" repeatCount="indefinite" begin="1s" />
+                </circle>
 
-            <path d="M450 300 C 450 210, 360 130, 270 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.2" fill="none"></path>
-            <path d="M450 300 C 450 210, 360 130, 270 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" style={{ strokeDasharray: 520, strokeDashoffset: 520 }}>
-                <animate attributeName="stroke-dashoffset" values="520;0;520" dur="6s" begin="0.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
-            </path>
+                {/* Core Icon Circle */}
+                <circle r="25" fill="white" stroke="currentColor" strokeWidth="2" />
+                <g transform="translate(-12, -12)">
+                    <Zap size={24} className="text-accent" />
+                </g>
+            </g>
 
-            <path d="M450 300 C 450 150, 420 80, 390 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.2" fill="none"></path>
-            <path d="M450 300 C 450 150, 420 80, 390 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" style={{ strokeDasharray: 450, strokeDashoffset: 450 }}>
-                <animate attributeName="stroke-dashoffset" values="450;0;450" dur="6s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
-            </path>
+            {/* Connected Nodes */}
+            {[0, 72, 144, 216, 288].map((deg, i) => (
+                <g key={i} transform={`translate(200, 150) rotate(${deg}) translate(80, 0)`}>
+                    {/* Connection Line */}
+                    <line x1="-55" y1="0" x2="0" y2="0" stroke="currentColor" strokeWidth="2" strokeOpacity="0.2" />
 
-            <path d="M450 300 C 450 150, 480 80, 510 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.2" fill="none"></path>
-            <path d="M450 300 C 450 150, 480 80, 510 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" style={{ strokeDasharray: 450, strokeDashoffset: 450 }}>
-                <animate attributeName="stroke-dashoffset" values="450;0;450" dur="6s" begin="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
-            </path>
+                    {/* Moving Data Packet */}
+                    <circle r="2" fill="currentColor">
+                        <animateMotion path="M-55 0 L 0 0" dur="6s" repeatCount="indefinite" begin={`${i * 0.5}s`} />
+                    </circle>
 
-            <path d="M450 300 C 450 210, 540 130, 630 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.2" fill="none"></path>
-            <path d="M450 300 C 450 210, 540 130, 630 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" style={{ strokeDasharray: 520, strokeDashoffset: 520 }}>
-                <animate attributeName="stroke-dashoffset" values="520;0;520" dur="6s" begin="0.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
-            </path>
-
-            <path d="M450 300 C 450 200, 600 120, 750 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeOpacity="0.2" fill="none"></path>
-            <path d="M450 300 C 450 200, 600 120, 750 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" style={{ strokeDasharray: 600, strokeDashoffset: 600 }}>
-                <animate attributeName="stroke-dashoffset" values="600;0;600" dur="6s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
-            </path>
-
-            {/* Central Hub Icon */}
-            <foreignObject x="418" y="268" width="64" height="64">
-                <div className="flex items-center justify-center w-full h-full rounded-2xl ring-4 bg-accent/10 ring-accent/20 backdrop-blur-sm shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-                    <Zap className="w-8 h-8 text-accent" />
-                </div>
-            </foreignObject>
+                    {/* Outer Node */}
+                    <circle r="8" fill="white" stroke="currentColor" strokeWidth="2" />
+                    <circle r="3" fill="currentColor" opacity="0.5" />
+                </g>
+            ))}
 
         </svg>
     )
