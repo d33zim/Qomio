@@ -47,6 +47,12 @@ export default function Navigation() {
             Prozess
           </Link>
           <Link
+            href="/#showcase"
+            className="font-mono text-xs uppercase tracking-widest hover:text-accent-warm active:text-accent focus:text-accent transition-colors"
+          >
+            Showcase
+          </Link>
+          <Link
             href="/#warum"
             className="font-mono text-xs uppercase tracking-widest hover:text-accent-warm active:text-accent focus:text-accent transition-colors"
           >

@@ -150,7 +150,7 @@ export default function Services() {
               e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
               e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
             }}
-            className="service-card group w-full h-full bg-white rounded-3xl border border-black/10 shadow-sm overflow-hidden relative hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 hover:-translate-y-1"
+            className="service-card group w-full h-full bg-white rounded-3xl border border-black/20 shadow-md overflow-hidden relative hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 hover:-translate-y-1"
           >
             {/* Spotlight Overlay */}
             <div

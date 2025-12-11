@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-
 import SmoothScroll from '@/components/SmoothScroll'
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 export default function Datenschutz() {
   return (
     <>
-
       <SmoothScroll />
       <main className="min-h-screen bg-background">
         <Navigation />
@@ -27,127 +25,130 @@ export default function Datenschutz() {
                 Datenschutz
               </h1>
               <p className="text-secondary text-sm md:text-base">
-                Datenschutzerklärung für Qomio
+                Datenschutzerklärung
               </p>
             </div>
 
             {/* Content Sections */}
-            <div className="prose prose-gray max-w-none">
-              <section className="mb-12">
+            <div className="prose prose-gray max-w-none space-y-12">
+
+              {/* Verantwortlicher */}
+              <section>
                 <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-                  1. Datenschutz auf einen Blick
+                  Verantwortlicher
                 </h2>
-
-                <h3 className="text-xl font-semibold tracking-tight mb-3 mt-6">
-                  Allgemeine Hinweise
-                </h3>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
-                </p>
-
-                <h3 className="text-xl font-semibold tracking-tight mb-3 mt-6">
-                  Datenerfassung auf dieser Website
-                </h3>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  <strong className="text-primary">Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br />
-                  Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.
-                </p>
-
-                <p className="text-secondary mb-4 leading-relaxed">
-                  <strong className="text-primary">Wie erfassen wir Ihre Daten?</strong><br />
-                  Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.B. um Daten handeln, die Sie in ein Kontaktformular eingeben oder per E-Mail übermitteln.
-                </p>
-
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).
-                </p>
-              </section>
-
-              <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-                  2. Hosting
-                </h2>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Webseitenzugriffe und sonstige Daten, die über eine Website generiert werden, handeln.
-                </p>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Das Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).
-                </p>
-              </section>
-
-              <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-                  3. Allgemeine Hinweise und Pflichtinformationen
-                </h2>
-
-                <h3 className="text-xl font-semibold tracking-tight mb-3 mt-6">
-                  Datenschutz
-                </h3>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
-                </p>
-
-                <h3 className="text-xl font-semibold tracking-tight mb-3 mt-6">
-                  Hinweis zur verantwortlichen Stelle
-                </h3>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
-                </p>
-                <div className="bg-white border border-black/10 rounded-sm p-6 mb-4">
-                  <p className="text-primary font-medium mb-1">Qomio</p>
-                  <p className="text-secondary text-sm">Riedlingen, Deutschland</p>
-                  <p className="text-secondary text-sm mt-3">
-                    E-Mail: <a href="mailto:kontakt@qomio.de" className="text-cyan-500 hover:text-cyan-600">kontakt@qomio.de</a>
-                  </p>
+                <div className="bg-white border border-black/10 rounded-sm p-8">
+                  <p className="font-semibold text-lg text-primary mb-2">Neurohr Medienagentur</p>
+                  <p className="text-secondary">Peter Neurohr</p>
+                  <p className="text-secondary">Steinachweg 8</p>
+                  <p className="text-secondary">88525 Dürmentingen</p>
+                  <p className="text-secondary">Deutschland</p>
+                  <div className="mt-4 pt-4 border-t border-black/5">
+                    <p className="text-secondary">Telefon: 0 73 71 / 929 74 83</p>
+                    <p className="text-secondary">E-Mail: <a href="mailto:kontakt@qomio.de" className="text-primary hover:text-cyan-500">kontakt@qomio.de</a></p>
+                  </div>
                 </div>
-
-                <h3 className="text-xl font-semibold tracking-tight mb-3 mt-6">
-                  Widerruf Ihrer Einwilligung zur Datenverarbeitung
-                </h3>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
-                </p>
               </section>
 
-              <section className="mb-12">
+              {/* Arten der Daten */}
+              <section>
                 <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-                  4. Datenerfassung auf dieser Website
+                  Arten der verarbeiteten Daten
                 </h2>
-
-                <h3 className="text-xl font-semibold tracking-tight mb-3 mt-6">
-                  Kontaktformular / E-Mail-Kontakt
-                </h3>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Wenn Sie uns per E-Mail kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
-                </p>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
-                </p>
+                <ul className="list-disc pl-5 space-y-2 text-secondary marker:text-primary">
+                  <li>Bestandsdaten (z.B., Personen-Stammdaten, Namen oder Adressen).</li>
+                  <li>Kontaktdaten (z.B., E-Mail, Telefonnummern).</li>
+                  <li>Inhaltsdaten (z.B., Texteingaben, Fotografien, Videos).</li>
+                  <li>Nutzungsdaten (z.B., besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten).</li>
+                  <li>Meta-/Kommunikationsdaten (z.B., Geräte-Informationen, IP-Adressen).</li>
+                </ul>
               </section>
 
-              <section className="mb-12">
+              {/* Kategorien betroffener Personen */}
+              <section>
                 <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-                  5. WhatsApp-Kontakt
+                  Kategorien betroffener Personen
                 </h2>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Auf unserer Website bieten wir die Möglichkeit der Kontaktaufnahme über WhatsApp an. Wenn Sie uns über WhatsApp kontaktieren, werden Ihre Daten (z.B. Telefonnummer, Name, Nachrichteninhalt) über die Server von WhatsApp (Meta Platforms Ireland Limited) verarbeitet.
-                </p>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Die Nutzung von WhatsApp erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Bitte beachten Sie, dass WhatsApp möglicherweise Daten in Länder außerhalb der EU/EWR überträgt und eigene Datenschutzrichtlinien hat.
+                <p className="text-secondary leading-relaxed">
+                  Besucher und Nutzer des Onlineangebotes (Nachfolgend bezeichnen wir die betroffenen Personen zusammenfassend auch als „Nutzer“).
                 </p>
               </section>
 
-              <section className="mb-12">
+              {/* Zweck der Verarbeitung */}
+              <section>
                 <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-                  6. Ihre Rechte
+                  Zweck der Verarbeitung
                 </h2>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung oder Löschung dieser Daten.
+                <ul className="list-disc pl-5 space-y-2 text-secondary marker:text-primary">
+                  <li>Zurverfügungstellung des Onlineangebotes, seiner Funktionen und Inhalte.</li>
+                  <li>Beantwortung von Kontaktanfragen und Kommunikation mit Nutzern.</li>
+                  <li>Sicherheitsmaßnahmen.</li>
+                  <li>Reichweitenmessung/Marketing.</li>
+                </ul>
+              </section>
+
+              {/* Rechtsgrundlagen */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+                  Maßgebliche Rechtsgrundlagen
+                </h2>
+                <p className="text-secondary leading-relaxed mb-4">
+                  Nach Maßgabe des Art. 13 DSGVO teilen wir Ihnen die Rechtsgrundlagen unserer Datenverarbeitungen mit. Für Nutzer aus dem Geltungsbereich der Datenschutzgrundverordnung (DSGVO), d.h. der EU und des EWG gilt, sofern die Rechtsgrundlage in der Datenschutzerklärung nicht genannt wird, Folgendes:
                 </p>
-                <p className="text-secondary mb-4 leading-relaxed">
-                  Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.
+                <ul className="list-disc pl-5 space-y-2 text-secondary marker:text-primary">
+                  <li>Die Rechtsgrundlage für die Einholung von Einwilligungen ist Art. 6 Abs. 1 lit. a und Art. 7 DSGVO.</li>
+                  <li>Die Rechtsgrundlage für die Verarbeitung zur Erfüllung unserer Leistungen und Durchführung vertraglicher Maßnahmen sowie Beantwortung von Anfragen ist Art. 6 Abs. 1 lit. b DSGVO.</li>
+                  <li>Die Rechtsgrundlage für die Verarbeitung zur Erfüllung unserer rechtlichen Verpflichtungen ist Art. 6 Abs. 1 lit. c DSGVO.</li>
+                  <li>Die Rechtsgrundlage für die Verarbeitung zur Wahrung unserer berechtigten Interessen ist Art. 6 Abs. 1 lit. f DSGVO.</li>
+                </ul>
+              </section>
+
+              {/* Sicherheitsmaßnahmen */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+                  Sicherheitsmaßnahmen
+                </h2>
+                <p className="text-secondary leading-relaxed">
+                  Wir treffen nach Maßgabe der gesetzlichen Vorgaben unter Berücksichtigung des Stands der Technik, der Implementierungskosten und der Art, des Umfangs, der Umstände und der Zwecke der Verarbeitung sowie der unterschiedlichen Eintrittswahrscheinlichkeit und Schwere des Risikos für die Rechte und Freiheiten natürlicher Personen, geeignete technische und organisatorische Maßnahmen, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten.
                 </p>
               </section>
+
+              {/* Hosting */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+                  Hosting und E-Mail-Versand
+                </h2>
+                <p className="text-secondary leading-relaxed mb-4">
+                  Die von uns in Anspruch genommenen Hosting-Leistungen dienen der Zurverfügungstellung der folgenden Leistungen: Infrastruktur- und Plattformdienstleistungen, Rechenkapazität, Speicherplatz und Datenbankdienste, E-Mail-Versand, Sicherheitsleistungen sowie technische Wartungsleistungen, die wir zum Zwecke des Betriebs dieses Onlineangebotes einsetzen.
+                </p>
+                <p className="text-secondary leading-relaxed">
+                  Hierbei verarbeiten wir, bzw. unser Hostinganbieter Bestandsdaten, Kontaktdaten, Inhaltsdaten, Vertragsdaten, Nutzungsdaten, Meta- und Kommunikationsdaten von Kunden, Interessenten und Besuchern dieses Onlineangebotes auf Grundlage unserer berechtigten Interessen an einer effizienten und sicheren Zurverfügungstellung dieses Onlineangebotes gem. Art. 6 Abs. 1 lit. f DSGVO i.V.m. Art. 28 DSGVO (Abschluss Auftragsverarbeitungsvertrag).
+                </p>
+              </section>
+
+              {/* Kontaktaufnahme */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+                  Kontaktaufnahme
+                </h2>
+                <p className="text-secondary leading-relaxed mb-4">
+                  Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail, Telefon oder via sozialer Medien) werden die Angaben des Nutzers zur Bearbeitung der Kontaktanfrage und deren Abwicklung gem. Art. 6 Abs. 1 lit. b. (im Rahmen vertraglicher-/vorvertraglicher Beziehungen), Art. 6 Abs. 1 lit. f. (andere Anfragen) DSGVO verarbeitet. Die Angaben der Nutzer können in einem Customer-Relationship-Management System (“CRM System”) oder vergleichbarer Anfragenorganisation gespeichert werden.
+                </p>
+                <p className="text-secondary leading-relaxed">
+                  Wir löschen die Anfragen, sofern diese nicht mehr erforderlich sind. Wir überprüfen die Erforderlichkeit alle zwei Jahre; Ferner gelten die gesetzlichen Archivierungspflichten.
+                </p>
+              </section>
+
+              {/* Rechte der betroffenen Personen */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+                  Rechte der betroffenen Personen
+                </h2>
+                <p className="text-secondary leading-relaxed">
+                  Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob betreffende Daten verarbeitet werden und auf Auskunft über diese Daten sowie auf weitere Informationen und Kopie der Daten entsprechend Art. 15 DSGVO. Sie haben entsprechend. Art. 16 DSGVO das Recht, die Vervollständigung der Sie betreffenden Daten oder die Berichtigung der Sie betreffenden unrichtigen Daten zu verlangen. Sie haben nach Maßgabe des Art. 17 DSGVO das Recht zu verlangen, dass betreffende Daten unverzüglich gelöscht werden, bzw. alternativ nach Maßgabe des Art. 18 DSGVO eine Einschränkung der Verarbeitung der Daten zu verlangen. Sie haben das Recht zu verlangen, dass die Sie betreffenden Daten, die Sie uns bereitgestellt haben nach Maßgabe des Art. 20 DSGVO zu erhalten und deren Übermittlung an andere Verantwortliche zu fordern. Sie haben ferner gem. Art. 77 DSGVO das Recht, eine Beschwerde bei der zuständigen Aufsichtsbehörde einzureichen.
+                </p>
+              </section>
+
             </div>
 
             {/* Back Link */}

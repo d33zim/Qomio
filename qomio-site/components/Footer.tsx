@@ -23,7 +23,7 @@ export default function Footer() {
         </Link>
       </div>
       <p className="font-mono text-[10px] text-white/40 uppercase tracking-widest">
-        © {currentYear} Qomio - Digitale Lösungen aus Riedlingen.
+        © {currentYear} Qomio - Digitale Lösungen aus Dürmentingen.
       </p>
     </footer>
   )

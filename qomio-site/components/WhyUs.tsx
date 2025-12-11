@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger)
 const reasons = [
   {
     title: 'Regional & persönlich',
-    description: 'Wir kommen aus der Region Riedlingen. Kurze Wege, schnelle Abstimmung, persönliche Zusammenarbeit.',
+    description: 'Wir kommen aus der Region Dürmentingen. Kurze Wege, schnelle Abstimmung, persönliche Zusammenarbeit.',
     Illustration: WhyRegional,
   },
   {
@@ -105,7 +105,7 @@ export default function WhyUs() {
               e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
               e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
             }}
-            className="why-card group relative bg-white rounded-3xl border border-black/10 shadow-sm overflow-hidden hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500"
+            className="why-card group relative bg-white rounded-3xl border border-black/20 shadow-md overflow-hidden hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500"
           >
             {/* Flashlight Overlay */}
             <div

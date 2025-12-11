@@ -7,7 +7,7 @@ export default function Marquee() {
     'Vue.js',
     'TypeScript',
     'Node.js',
-    'Laravel',
+
     'Tailwind CSS',
     'GSAP',
     'Automatisierung',

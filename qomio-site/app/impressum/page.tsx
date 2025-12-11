@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
-
 import SmoothScroll from '@/components/SmoothScroll'
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 export default function Impressum() {
   return (
     <>
-
       <SmoothScroll />
       <main className="min-h-screen bg-background">
         <Navigation />
@@ -39,10 +37,12 @@ export default function Impressum() {
                   Anbieter
                 </h2>
                 <div className="bg-white border border-black/10 rounded-sm p-8">
-                  <p className="text-primary font-semibold text-lg mb-4">Qomio</p>
-                  <div className="space-y-2 text-secondary">
-                    <p>Riedlingen</p>
-                    <p>Baden-Württemberg, Deutschland</p>
+                  <p className="text-primary font-semibold text-lg mb-2">Neurohr Medienagentur</p>
+                  <p className="text-secondary mb-4">Inhaber: Peter Neurohr</p>
+                  <div className="space-y-1 text-secondary">
+                    <p>Steinachweg 8</p>
+                    <p>88525 Dürmentingen</p>
+                    <p>Deutschland</p>
                   </div>
                 </div>
               </section>
@@ -53,12 +53,12 @@ export default function Impressum() {
                   Kontakt
                 </h2>
                 <div className="bg-white border border-black/10 rounded-sm p-8">
-                  <div className="space-y-3">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <div>
                       <p className="text-xs font-mono uppercase text-secondary mb-1">E-Mail</p>
                       <a
                         href="mailto:kontakt@qomio.de"
-                        className="text-primary hover:text-cyan-500 transition-colors font-medium"
+                        className="text-primary hover:text-cyan-500 transition-colors font-medium break-all"
                       >
                         kontakt@qomio.de
                       </a>
@@ -66,10 +66,10 @@ export default function Impressum() {
                     <div>
                       <p className="text-xs font-mono uppercase text-secondary mb-1">Telefon</p>
                       <a
-                        href="tel:+4973719297483"
+                        href="tel:073719297483"
                         className="text-primary hover:text-cyan-500 transition-colors font-medium"
                       >
-                        +49 7371 9297483
+                        0 73 71 / 929 74 83
                       </a>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ export default function Impressum() {
                   <p className="text-secondary leading-relaxed">
                     Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
                     <span className="text-primary font-medium">
-                      Wird bei Bedarf nachgereicht
+                      DE255229140
                     </span>
                   </p>
                 </div>
@@ -100,10 +100,11 @@ export default function Impressum() {
                   <p className="text-secondary leading-relaxed">
                     Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:
                   </p>
-                  <p className="text-primary font-medium mt-3">
-                    Qomio<br />
-                    Riedlingen, Deutschland
-                  </p>
+                  <div className="mt-4 text-primary">
+                    <p className="font-semibold">Peter Neurohr</p>
+                    <p>Steinachweg 8</p>
+                    <p>88525 Dürmentingen</p>
+                  </div>
                 </div>
               </section>
 
@@ -133,7 +134,7 @@ export default function Impressum() {
               {/* Verbraucherstreitbeilegung */}
               <section>
                 <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">
-                  Verbraucherstreitbeilegung / Universalschlichtungsstelle
+                  Verbraucherstreitbeilegung
                 </h2>
                 <div className="bg-white border border-black/10 rounded-sm p-8">
                   <p className="text-secondary leading-relaxed">
@@ -148,26 +149,34 @@ export default function Impressum() {
                   Haftungsausschluss
                 </h2>
 
-                <h3 className="text-xl font-semibold tracking-tight mb-3">
-                  Haftung für Inhalte
-                </h3>
-                <p className="text-secondary mb-6 leading-relaxed">
-                  Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-                </p>
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight mb-3">
+                      Haftung für Inhalte
+                    </h3>
+                    <p className="text-secondary leading-relaxed">
+                      Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                    </p>
+                  </div>
 
-                <h3 className="text-xl font-semibold tracking-tight mb-3">
-                  Haftung für Links
-                </h3>
-                <p className="text-secondary mb-6 leading-relaxed">
-                  Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-                </p>
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight mb-3">
+                      Haftung für Links
+                    </h3>
+                    <p className="text-secondary leading-relaxed">
+                      Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+                    </p>
+                  </div>
 
-                <h3 className="text-xl font-semibold tracking-tight mb-3">
-                  Urheberrecht
-                </h3>
-                <p className="text-secondary leading-relaxed">
-                  Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
-                </p>
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight mb-3">
+                      Urheberrecht
+                    </h3>
+                    <p className="text-secondary leading-relaxed">
+                      Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+                    </p>
+                  </div>
+                </div>
               </section>
             </div>
 

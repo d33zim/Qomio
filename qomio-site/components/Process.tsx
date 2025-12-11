@@ -128,7 +128,7 @@ export default function Process() {
                 e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
                 e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
               }}
-              className={`process-card group relative bg-white rounded-3xl border border-black/10 shadow-sm overflow-hidden hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 hover:-translate-y-1 ${step.colSpan || ''}`}
+              className={`process-card group relative bg-white rounded-3xl border border-black/20 shadow-md overflow-hidden hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 hover:-translate-y-1 ${step.colSpan || ''}`}
             >
               {/* Flashlight Overlay */}
               <div

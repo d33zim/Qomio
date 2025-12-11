@@ -8,39 +8,39 @@ import { BookingWidget, AnalyticsWidget, EcommerceWidget, EnterpriseWidget } fro
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Projects Configuration - German Localization
 const projects = [
     {
-        title: 'Horizon Booking',
-        category: 'Travel & Tourism',
+        title: 'Horizon Reisen',
+        category: 'Reisen & Tourismus',
         description: 'Eine intuitive Buchungsplattform mit komplexer Filter-Logik und Echtzeit-Verfügbarkeiten.',
         Widget: BookingWidget,
-        colSpan: 'md:col-span-1', // Balanced grid
-        tags: ['Web App', 'React', 'Booking System'],
+        colSpan: 'md:col-span-1',
+        tags: ['Web App', 'React', 'Buchungssystem'],
     },
     {
-        title: 'Nova Analytics',
-        category: 'FinTech',
-        description: 'High-Performance Dashboard zur Visualisierung komplexer Finanzdaten in Echtzeit.',
+        title: 'Nova Analyse',
+        category: 'Finanzen & Tech',
+        description: 'Interaktive Dashboards zur Visualisierung großer Datenmengen mit Detail-Ansichten.',
         Widget: AnalyticsWidget,
         colSpan: 'md:col-span-1',
-        tags: ['Dashboard', 'Data Viz', 'SaaS'],
+        tags: ['Dashboard', 'Daten', 'Analytics'],
     },
     {
-        title: 'Lumina Commerce',
+        title: 'Qomio Shop',
         category: 'E-Commerce',
-        description: 'Mobile-First Shopping Experience mit ultraschnellen Ladezeiten und moderner UX.',
+        description: 'Ein moderner Online-Shop mit Warenkorb-Funktion und dynamischen Produkt-Varianten.',
         Widget: EcommerceWidget,
         colSpan: 'md:col-span-1',
-        tags: ['Shop', 'Mobile First', 'Scale'],
+        tags: ['Shopify', 'Next.js', 'Commerce'],
     },
     {
         title: 'Enterprise Core',
-        category: 'Internal Tools',
-        description: 'Maßgeschneiderte Verwaltungssoftware zur Automatisierung interner Prozesse.',
+        category: 'Software & SaaS',
+        description: 'Mächtiges Projektmanagement-Tool mit Kanban-Board und Task-Verwaltung.',
         Widget: EnterpriseWidget,
         colSpan: 'md:col-span-1',
-        tags: ['Automation', 'Workflow', 'Kanban'],
-        isMinimal: false
+        tags: ['SaaS', 'B2B', 'Produktivität'],
     },
 ]
 
@@ -113,7 +113,7 @@ export default function Showcase() {
                 {projects.map((project, index) => (
                     <div
                         key={index}
-                        className={`showcase-card group relative bg-white rounded-3xl border border-black/10 shadow-sm overflow-hidden hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 hover:-translate-y-1 ${project.colSpan}`}
+                        className={`showcase-card group relative bg-white rounded-3xl border border-black/20 shadow-md overflow-hidden hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 hover:-translate-y-1 ${project.colSpan}`}
                     >
 
                         {/* Widget Area - Interactive */}

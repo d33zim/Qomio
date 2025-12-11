@@ -92,7 +92,7 @@ export default function Contact() {
         </div>
 
         <p className="contact-element text-secondary text-sm md:text-base max-w-2xl mx-auto mb-10">
-          Wir freuen uns auf Ihr Unternehmen aus Riedlingen, Biberach, Bad Saulgau, Ravensburg und Umgebung.
+          Wir freuen uns auf Ihr Unternehmen aus Dürmentingen, Riedlingen, Biberach, Bad Saulgau, Ravensburg und Umgebung.
         </p>
 
         <div ref={footerRef} className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center md:text-left border-t border-black/5 pt-12">
@@ -104,7 +104,7 @@ export default function Contact() {
           </div>
           <div>
             <h4 className="font-mono text-[10px] uppercase text-secondary mb-3">Standort</h4>
-            <p className="text-sm md:text-base font-medium">Riedlingen</p>
+            <p className="text-sm md:text-base font-medium">Dürmentingen</p>
             <p className="text-sm md:text-base font-medium text-secondary">Baden-Württemberg</p>
           </div>
           <div>

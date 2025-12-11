@@ -13,24 +13,24 @@ export default function Hero() {
     // Wispr Glow
     tl.to('.hero-glow', { opacity: 1, duration: 1.5, ease: 'power2.out' }, '-=0.5')
 
-    // Character reveal with blur-to-focus
-    .to('.hero-char', {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      duration: 1.2,
-      stagger: 0.1,
-      ease: 'power3.out'
-    }, '-=1.0')
+      // Character reveal with blur-to-focus
+      .to('.hero-char', {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 1.2,
+        stagger: 0.1,
+        ease: 'power3.out'
+      }, '-=1.0')
 
-    // Fade in other elements
-    .to('.hero-fade-in', {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power2.out'
-    }, '-=0.8')
+      // Fade in other elements
+      .to('.hero-fade-in', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, '-=0.8')
 
     // Magnetic button effect
     const magneticBtns = document.querySelectorAll('.magnetic-btn')
@@ -56,7 +56,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-6 pt-8 md:pt-0 overflow-hidden">
+    <section className="relative min-h-[75vh] md:min-h-screen flex flex-col justify-start md:justify-center items-center px-4 md:px-6 pt-32 pb-16 md:py-0 overflow-hidden">
       {/* Canvas Background */}
       <CanvasBackground />
 
@@ -65,16 +65,7 @@ export default function Hero() {
 
       <div className="max-w-[1800px] mx-auto w-full z-10 relative flex flex-col items-center text-center">
         {/* Floating Status Badge */}
-        <div className="mb-8 md:mb-12 flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md border border-white/20 shadow-sm opacity-0 hero-fade-in">
-          <div className="flex gap-1 h-3 items-center">
-            <span className="w-1 h-full bg-accent rounded-full animate-[pulse_1s_ease-in-out_infinite]"></span>
-            <span className="w-1 h-2/3 bg-accent rounded-full animate-[pulse_1.2s_ease-in-out_infinite]"></span>
-            <span className="w-1 h-full bg-accent rounded-full animate-[pulse_0.8s_ease-in-out_infinite]"></span>
-          </div>
-          <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-primary font-medium">
-            Digitale Lösungen aus Riedlingen
-          </span>
-        </div>
+        {/* Floating Status Badge - Removed */}
 
         {/* Main Title with Split Reveal - Bold Space Grotesk typography */}
         <h1 className="font-display text-[13vw] md:text-[10vw] leading-[0.9] font-bold tracking-tighter text-primary uppercase mix-blend-darken flex flex-col items-center">
