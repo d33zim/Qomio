@@ -30,6 +30,47 @@ export default function Home() {
         <Contact />
         <Footer />
       </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ProfessionalService',
+            name: 'Qomio - Neurohr Medienagentur',
+            image: 'https://qomio.de/og-image.png',
+            description: 'Webseiten, Apps & Automatisierungslösungen für Unternehmen.',
+            '@id': 'https://qomio.de',
+            url: 'https://qomio.de',
+            telephone: '+4973719297483',
+            email: 'kontakt@qomio.de',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'Steinachweg 8',
+              addressLocality: 'Dürmentingen',
+              postalCode: '88525',
+              addressCountry: 'DE',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 48.1147,
+              longitude: 9.5333,
+            },
+            openingHoursSpecification: [
+              {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                opens: '09:00',
+                closes: '18:00',
+              },
+            ],
+            sameAs: [
+              'https://www.instagram.com/qomio_digital/',
+              'https://www.tiktok.com/@qomio86',
+            ],
+            priceRange: '$$',
+          }),
+        }}
+      />
     </>
   )
 }

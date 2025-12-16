@@ -108,7 +108,11 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 hero-fade-in animate-bounce">
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 hero-fade-in animate-bounce"
+        aria-label="Nach unten scrollen"
+        role="img"
+      >
         <svg
           className="w-5 h-5 text-secondary/50"
           fill="none"
